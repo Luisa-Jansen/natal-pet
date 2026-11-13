@@ -8,4 +8,4 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "natal_pet_db"
-database_id = "COLE-AQUI-O-ID-GERADO-PELO-WRANGLER"
+database_id = "0ba4d73c-b117-4a4f-b62c-d9d4ec479f8a"
