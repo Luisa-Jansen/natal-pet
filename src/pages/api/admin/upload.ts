@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
-import type { R2Bucket } from '@cloudflare/workers-types';
+import type { KVNamespace } from '@cloudflare/workers-types';
 import { json } from '../../../lib/http';
 
 export const prerender = false;
@@ -16,8 +16,8 @@ const EXT: Record<string, string> = {
 // POST /api/admin/upload  (multipart: arquivo, [pasta])  -> { url }
 // Usado para fotos de animais e QR Code do PIX.
 export const POST: APIRoute = async ({ request }) => {
-  const bucket = (env as any).UPLOADS as R2Bucket | undefined;
-  if (!bucket) return json({ erro: 'Armazenamento indisponível' }, 503);
+  const uploads = (env as any).UPLOADS as KVNamespace | undefined;
+  if (!uploads) return json({ erro: 'Armazenamento indisponível' }, 503);
 
   let form: FormData;
   try {
@@ -33,6 +33,6 @@ export const POST: APIRoute = async ({ request }) => {
   if (!EXT[tipo]) return json({ erro: 'Envie uma imagem PNG, JPG ou WEBP.' }, 415);
 
   const chave = `${pasta}/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${EXT[tipo]}`;
-  await bucket.put(chave, await arquivo.arrayBuffer(), { httpMetadata: { contentType: tipo } });
+  await uploads.put(chave, await arquivo.arrayBuffer(), { metadata: { contentType: tipo } });
   return json({ ok: true, url: `/uploads/${chave}` });
 };

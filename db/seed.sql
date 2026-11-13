@@ -100,7 +100,7 @@ INSERT OR IGNORE INTO config (chave, valor) VALUES ('telefones', '["556283434199
 
 -- ===== USUÁRIO ADMINISTRADOR =====
 -- login: admin@natalpet.com.br   |   senha inicial: natal2026   (troque no painel!)
-INSERT OR IGNORE INTO usuarios_admin (email, nome, senha_hash, senha_salt) VALUES ('admin@natalpet.com.br', 'Administração', '2cf76750237467d68d402f6d26612e0be8389c449c67b2b20d0575b9c1b4a35e', 'd7c23ed71a0ca22056b2f06a6863cf72');
+INSERT OR IGNORE INTO usuarios_admin (email, nome, senha_hash, senha_salt) VALUES ('admin@natalpet.com.br', 'Administração', 'f55848db8ef2fea19af2894f514576cad52feeed0f73a92321c50dba0de72086', 'fdd28de869a0d3c0952e76461905b556');
 
 -- ===== MIGRAÇÃO: adocoes antigas -> padrinhos + reservas =====
 -- 1) cria um padrinho por adoção (id determinístico = 100000 + adocoes.id)

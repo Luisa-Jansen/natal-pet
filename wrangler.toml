@@ -11,7 +11,8 @@ database_name = "natal_pet_db"
 database_id = "0ba4d73c-b117-4a4f-b62c-d9d4ec479f8a"
 
 # Armazenamento de arquivos (fotos dos animais e comprovantes de PIX).
-# Crie o bucket uma única vez: `npx wrangler r2 bucket create natal-pet-uploads`
-[[r2_buckets]]
+# Usa Cloudflare KV (gratuito, sem precisar ativar o R2). Crie uma vez:
+# `npx wrangler kv namespace create UPLOADS` e cole o id retornado abaixo.
+[[kv_namespaces]]
 binding = "UPLOADS"
-bucket_name = "natal-pet-uploads"
+id = "133a57d3db0247a293f7ef5b568c9f94"

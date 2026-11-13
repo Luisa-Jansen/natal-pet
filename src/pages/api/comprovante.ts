@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
-import type { D1Database, R2Bucket } from '@cloudflare/workers-types';
+import type { D1Database, KVNamespace } from '@cloudflare/workers-types';
 import { json } from '../../lib/http';
 import { registrarHistorico } from '../../lib/db';
 
@@ -17,11 +17,11 @@ const EXT: Record<string, string> = {
 };
 
 // POST /api/comprovante  (multipart/form-data: codigo, arquivo)
-// Sobe o comprovante do PIX para o R2 e marca a reserva como aguardando_presente.
+// Sobe o comprovante do PIX para o KV e marca a reserva como aguardando_presente.
 export const POST: APIRoute = async ({ request }) => {
   const db = (env as any).DB as D1Database | undefined;
-  const bucket = (env as any).UPLOADS as R2Bucket | undefined;
-  if (!db || !bucket) return json({ erro: 'Armazenamento indisponível' }, 503);
+  const uploads = (env as any).UPLOADS as KVNamespace | undefined;
+  if (!db || !uploads) return json({ erro: 'Armazenamento indisponível' }, 503);
 
   let form: FormData;
   try {
@@ -47,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (reserva.status === 'cancelada') return json({ erro: 'Esta reserva foi cancelada.' }, 409);
 
   const chave = `comprovantes/${codigo}-${Date.now()}.${EXT[tipo] || 'bin'}`;
-  await bucket.put(chave, await arquivo.arrayBuffer(), { httpMetadata: { contentType: tipo } });
+  await uploads.put(chave, await arquivo.arrayBuffer(), { metadata: { contentType: tipo } });
   const url = `/uploads/${chave}`;
 
   const novoStatus = reserva.status === 'reservada' ? 'aguardando_presente' : reserva.status;
