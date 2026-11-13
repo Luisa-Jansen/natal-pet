@@ -9,3 +9,9 @@ compatibility_flags = ["nodejs_compat"]
 binding = "DB"
 database_name = "natal_pet_db"
 database_id = "0ba4d73c-b117-4a4f-b62c-d9d4ec479f8a"
+
+# Armazenamento de arquivos (fotos dos animais e comprovantes de PIX).
+# Crie o bucket uma única vez: `npx wrangler r2 bucket create natal-pet-uploads`
+[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "natal-pet-uploads"

@@ -10,9 +10,15 @@
     "deploy": "astro build && wrangler deploy",
     "astro": "astro",
     "db:create": "wrangler d1 create natal_pet_db",
+    "db:seed": "node db/seed.mjs",
     "db:local": "wrangler d1 execute natal_pet_db --local --file=./db/schema.sql",
     "db:remote": "wrangler d1 execute natal_pet_db --remote --file=./db/schema.sql",
-    "db:adocoes": "wrangler d1 execute natal_pet_db --remote --command \"SELECT * FROM adocoes ORDER BY criado_em DESC;\""
+    "seed:local": "node db/seed.mjs && wrangler d1 execute natal_pet_db --local --file=./db/seed.sql",
+    "seed:remote": "node db/seed.mjs && wrangler d1 execute natal_pet_db --remote --file=./db/seed.sql",
+    "setup:local": "npm run db:local && npm run seed:local",
+    "setup:remote": "npm run db:remote && npm run seed:remote",
+    "r2:create": "wrangler r2 bucket create natal-pet-uploads",
+    "db:reservas": "wrangler d1 execute natal_pet_db --remote --command \"SELECT codigo, animal_id, modalidade, status, criado_em FROM reservas ORDER BY criado_em DESC;\""
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.7",

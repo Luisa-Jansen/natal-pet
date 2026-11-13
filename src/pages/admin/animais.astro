@@ -1,0 +1,135 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { env } from 'cloudflare:workers';
+import { listarAnimais, STATUS_LABEL } from '../../lib/db';
+import { CATEGORIAS } from '../../lib/categorias.js';
+
+const db = (env as any).DB;
+const animais = await listarAnimais(db, { apenasAtivos: false });
+const categorias = Object.entries(CATEGORIAS).map(([k, c]) => ({ k, label: `${c.emoji} ${c.label}` }));
+const dadosClient = animais.map((a) => ({
+  id: a.id,
+  nome: a.nome,
+  especie: a.especie,
+  categoria: a.categoria,
+  pedido: a.pedido,
+  historia: a.historia,
+  cartinha: a.cartinha,
+  foto: a.foto,
+  foto_posicao: a.foto_posicao || '50% 42%',
+  links_compra: a.links_compra,
+}));
+---
+
+<AdminLayout titulo="Gestão de animais" ativo="animais">
+  <div class="painel" id="painel-form" style="display:none">
+    <h2 id="form-titulo">Novo animal</h2>
+    <form class="admin-form" id="form-animal">
+      <input type="hidden" id="a-id" />
+      <div class="lin">
+        <div><label for="a-nome">Nome *</label><input id="a-nome" required maxlength="80" /></div>
+        <div>
+          <label for="a-especie">Espécie</label>
+          <select id="a-especie">
+            <option value="indefinido">Pet 🐾</option>
+            <option value="cachorro">Cachorro 🐶</option>
+            <option value="gato">Gato 🐱</option>
+          </select>
+        </div>
+      </div>
+      <div class="lin">
+        <div>
+          <label for="a-categoria">Categoria do presente</label>
+          <select id="a-categoria">
+            {categorias.map((c) => <option value={c.k}>{c.label}</option>)}
+          </select>
+        </div>
+        <div><label for="a-pedido">Pedido de Natal</label><input id="a-pedido" maxlength="400" placeholder="uma caminha nova..." /></div>
+      </div>
+      <div><label for="a-historia">História</label><textarea id="a-historia" maxlength="1000"></textarea></div>
+      <div><label for="a-cartinha">Cartinha completa (deixe em branco para gerar automaticamente)</label><textarea id="a-cartinha" maxlength="2000"></textarea></div>
+
+      <div>
+        <label>Foto</label>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <img id="a-foto-preview" class="thumb" style="width:72px;height:72px" src="" alt="" />
+          <div style="flex:1;min-width:200px">
+            <input id="a-foto" placeholder="/pets/nome.png ou URL" maxlength="300" />
+            <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+              <input type="file" id="a-foto-file" accept="image/png,image/jpeg,image/webp" />
+              <button type="button" class="btn-mini" id="btn-upload-foto">Enviar foto</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label>Enquadramento da foto</label>
+        <input type="hidden" id="a-foto-posicao" value="50% 42%" />
+        <div class="enquadra">
+          <div class="enquadra-preview" id="enquadra-preview" title="Arraste para posicionar o foco da foto">
+            <img id="enquadra-img" src="" alt="Pré-visualização do enquadramento" />
+            <span class="enquadra-foco" id="enquadra-foco"></span>
+          </div>
+          <div class="enquadra-ajuda">
+            <p>Arraste o ponto sobre a foto para escolher o foco. O corte 4:3 é o mesmo da vitrine — útil quando o animal fica mais acima, abaixo ou para o lado.</p>
+            <div class="enquadra-acoes">
+              <button type="button" class="btn-mini" data-foco="50 42">Centro</button>
+              <button type="button" class="btn-mini" data-foco="50 22">Rosto (topo)</button>
+              <button type="button" class="btn-mini" data-foco="50 70">Baixo</button>
+            </div>
+            <span class="enquadra-valor" id="enquadra-valor">50% 42%</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label>Links de compra online (opcional)</label>
+        <div id="links-lista"></div>
+        <button type="button" class="btn-mini" id="btn-add-link">+ Adicionar link</button>
+      </div>
+
+      <div class="admin-msg" id="form-msg"></div>
+      <div class="acoes-linha">
+        <button type="submit" class="btn btn-primario btn-pequeno" id="btn-salvar">Salvar</button>
+        <button type="button" class="btn btn-fantasma btn-pequeno" id="btn-cancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="painel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px">
+      <h2 style="margin:0">{animais.length} animais</h2>
+      <button class="btn btn-primario btn-pequeno" id="btn-novo">+ Novo animal</button>
+    </div>
+    <div class="tab-wrap">
+      <table class="tab">
+        <thead>
+          <tr><th>Foto</th><th>Nome</th><th>Espécie</th><th>Categoria</th><th>Status</th><th>Ativa?</th><th></th></tr>
+        </thead>
+        <tbody>
+          {animais.map((a) => (
+            <tr data-id={a.id}>
+              <td><img class="thumb" src={a.foto} alt={a.nome} loading="lazy" /></td>
+              <td><b>{a.nome}</b></td>
+              <td>{a.especie}</td>
+              <td>{a.categoria}</td>
+              <td><span class={`pill s-${a.status}`}>{STATUS_LABEL[a.status] || a.status}</span></td>
+              <td>
+                <label class="toggle-ativo">
+                  <input type="checkbox" class="chk-ativo" data-id={a.id} checked={a.ativo === 1} />
+                  <span>{a.ativo === 1 ? 'Sim' : 'Não'}</span>
+                </label>
+              </td>
+              <td><button class="btn-mini btn-editar" data-id={a.id}>Editar</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="application/json" id="dados-animais" set:html={JSON.stringify(dadosClient)}></script>
+  <script src="../../scripts/admin-animais.js"></script>
+</AdminLayout>

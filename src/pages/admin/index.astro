@@ -1,0 +1,67 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { env } from 'cloudflare:workers';
+import { contarPorStatus, STATUS_LABEL, MODALIDADE_LABEL } from '../../lib/db';
+
+const db = (env as any).DB;
+const c = await contarPorStatus(db);
+
+const totalPadrinhos =
+  (await db.prepare('SELECT COUNT(*) AS n FROM padrinhos').first<{ n: number }>())?.n ?? 0;
+
+const { results: recentes = [] } = await db
+  .prepare(
+    `SELECT r.codigo, r.status, r.modalidade, r.criado_em, a.nome AS animal, p.nome AS padrinho
+     FROM reservas r JOIN animais a ON a.id = r.animal_id
+     LEFT JOIN padrinhos p ON p.id = r.padrinho_id
+     WHERE r.status <> 'cancelada'
+     ORDER BY r.criado_em DESC LIMIT 8`
+  )
+  .all();
+
+const metricas = [
+  { n: c.total, r: 'Total de animais' },
+  { n: c.disponivel, r: 'Cartinhas disponíveis' },
+  { n: c.reservada, r: 'Reservadas' },
+  { n: c.aguardando_presente, r: 'Aguardando presente' },
+  { n: c.presente_recebido, r: 'Presentes recebidos' },
+  { n: c.concluida, r: 'Concluídas' },
+];
+---
+
+<AdminLayout titulo="Painel" ativo="dashboard">
+  <div class="cards-metrica">
+    {metricas.map((m) => (
+      <div class="metrica"><div class="n">{m.n}</div><div class="r">{m.r}</div></div>
+    ))}
+  </div>
+
+  <div class="painel">
+    <h2>Reservas recentes</h2>
+    <div class="tab-wrap">
+      {recentes.length === 0 ? (
+        <p style="color:#6a7a70">Nenhuma reserva ainda.</p>
+      ) : (
+        <table class="tab">
+          <thead>
+            <tr><th>Código</th><th>Animal</th><th>Padrinho</th><th>Modalidade</th><th>Status</th><th>Data</th></tr>
+          </thead>
+          <tbody>
+            {recentes.map((r: any) => (
+              <tr>
+                <td><b>{r.codigo}</b></td>
+                <td>{r.animal}</td>
+                <td>{r.padrinho}</td>
+                <td>{MODALIDADE_LABEL[r.modalidade] || r.modalidade || '—'}</td>
+                <td><span class={`pill s-${r.status}`}>{STATUS_LABEL[r.status] || r.status}</span></td>
+                <td>{r.criado_em?.slice(0, 16)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+    <p style="margin-top:14px"><a href="/admin/presentes" class="btn-mini">Gerenciar presentes →</a> &nbsp; <b style="color:#5a6b60">{totalPadrinhos}</b> padrinhos cadastrados</p>
+  </div>
+</AdminLayout>

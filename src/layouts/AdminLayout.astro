@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+interface Props {
+  titulo: string;
+  ativo?: string;
+}
+const { titulo, ativo = '' } = Astro.props;
+const admin = Astro.locals.admin;
+const itens = [
+  { href: '/admin', chave: 'dashboard', rot: '📊 Painel' },
+  { href: '/admin/animais', chave: 'animais', rot: '🐾 Animais' },
+  { href: '/admin/presentes', chave: 'presentes', rot: '🎁 Presentes' },
+  { href: '/admin/padrinhos', chave: 'padrinhos', rot: '💝 Padrinhos' },
+  { href: '/admin/configuracoes', chave: 'config', rot: '⚙️ Configurações' },
+];
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{titulo} — Painel Natal PET</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="admin-body">
+    <header class="admin-topo">
+      <div class="admin-topo-inner">
+        <a href="/admin" class="admin-logo">🎄 Natal PET <small>Painel</small></a>
+        <nav class="admin-nav">
+          {itens.map((i) => (
+            <a href={i.href} class={ativo === i.chave ? 'on' : ''}>{i.rot}</a>
+          ))}
+        </nav>
+        <div class="admin-user">
+          <span>{admin?.nome || admin?.email}</span>
+          <button id="btn-sair" class="btn btn-fantasma btn-pequeno">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <h1 class="admin-h1">{titulo}</h1>
+      <slot />
+    </main>
+
+    <script>
+      document.getElementById('btn-sair')?.addEventListener('click', async () => {
+        await fetch('/api/admin/logout', { method: 'POST' });
+        location.href = '/admin/login';
+      });
+    </script>
+
+    <style is:global>
+      .admin-body { background: #f3f5f2; color: #1d2b22; min-height: 100vh; font-family: var(--fonte-texto); }
+      .admin-topo { background: var(--verde); color: #fff; box-shadow: var(--sombra); position: sticky; top: 0; z-index: 10; }
+      .admin-topo-inner { max-width: 1100px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+      .admin-logo { font-family: var(--fonte-titulo); color: #fff; font-weight: 700; text-decoration: none; font-size: 1.15rem; }
+      .admin-logo small { color: var(--dourado-claro); font-weight: 400; }
+      .admin-nav { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
+      .admin-nav a { color: #e8f3ec; text-decoration: none; padding: 7px 12px; border-radius: 8px; font-size: 0.92rem; }
+      .admin-nav a:hover { background: rgba(255,255,255,.12); }
+      .admin-nav a.on { background: #fff; color: var(--verde); font-weight: 600; }
+      .admin-user { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; }
+      .admin-user .btn-fantasma { color: #fff; border-color: rgba(255,255,255,.6); }
+      .admin-user .btn-fantasma:hover { background: #fff; color: var(--verde); }
+      .admin-main { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
+      .admin-h1 { font-family: var(--fonte-titulo); color: var(--verde); font-size: 1.9rem; font-weight: 700; margin-bottom: 20px; }
+
+      .cards-metrica { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 28px; }
+      .metrica { background: #fff; border-radius: 14px; padding: 18px; box-shadow: var(--sombra); border-left: 5px solid var(--dourado); }
+      .metrica .n { font-size: 2.2rem; font-weight: 700; color: var(--verde); line-height: 1; }
+      .metrica .r { font-size: 0.85rem; color: #5a6b60; margin-top: 6px; }
+
+      .painel { background: #fff; border-radius: 14px; padding: 20px; box-shadow: var(--sombra); margin-bottom: 20px; }
+      .painel h2 { color: var(--verde); font-size: 1.2rem; margin-bottom: 14px; }
+
+      table.tab { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+      table.tab th, table.tab td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eef0ed; vertical-align: middle; }
+      table.tab th { color: #5a6b60; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: .03em; }
+      .tab-wrap { overflow-x: auto; }
+
+      .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600; white-space: nowrap; }
+      .s-disponivel { background: #e4f3ea; color: #0f5132; }
+      .s-reservada { background: #fff2d6; color: #8a6300; }
+      .s-aguardando_presente { background: #ffe6d1; color: #9a4a00; }
+      .s-presente_recebido { background: #dbe8ff; color: #1b4e8a; }
+      .s-concluida { background: #e8e0ff; color: #553a9a; }
+      .s-cancelada { background: #f0f0f0; color: #777; }
+
+      .admin-form { display: grid; gap: 12px; }
+      .admin-form label { font-size: 0.82rem; font-weight: 600; color: var(--verde); display: block; margin-bottom: 4px; }
+      .admin-form input, .admin-form select, .admin-form textarea {
+        width: 100%; padding: 10px 12px; border: 1.5px solid #d8ddd8; border-radius: 8px; font-family: inherit; font-size: 0.95rem; background: #fff;
+      }
+      .admin-form textarea { min-height: 80px; resize: vertical; }
+      .admin-form .lin { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .admin-msg { font-size: 0.88rem; min-height: 1em; }
+      .admin-msg.ok { color: var(--verde); }
+      .admin-msg.err { color: var(--vermelho); }
+      .acoes-linha { display: flex; gap: 6px; flex-wrap: wrap; }
+      .btn-mini { padding: 5px 10px; font-size: 0.8rem; border-radius: 8px; border: 1.5px solid var(--verde); background: #fff; color: var(--verde); cursor: pointer; font-weight: 600; }
+      .btn-mini:hover { background: var(--verde); color: #fff; }
+      .btn-mini.perigo { border-color: var(--vermelho); color: var(--vermelho); }
+      .btn-mini.perigo:hover { background: var(--vermelho); color: #fff; }
+      .thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: #eee; }
+
+      /* ---- Ferramenta de enquadramento da foto ---- */
+      .enquadra { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+      .enquadra-preview {
+        position: relative; width: 240px; height: 180px; flex: none;
+        border-radius: 12px; overflow: hidden; background: #e9ecea;
+        border: 1.5px solid #d8ddd8; cursor: crosshair; touch-action: none;
+      }
+      .enquadra-preview img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; pointer-events: none; user-select: none; }
+      .enquadra-foco {
+        position: absolute; top: 42%; left: 50%; width: 26px; height: 26px;
+        transform: translate(-50%, -50%);
+        border: 3px solid #fff; border-radius: 50%;
+        box-shadow: 0 0 0 2px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.4);
+        background: rgba(31, 90, 61, 0.25); pointer-events: none;
+      }
+      .enquadra-ajuda { flex: 1; min-width: 200px; }
+      .enquadra-ajuda p { font-size: 0.85rem; color: #5a6b60; margin: 0 0 10px; line-height: 1.5; }
+      .enquadra-acoes { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+      .enquadra-valor { font-size: 0.82rem; color: var(--verde); font-weight: 600; font-family: monospace; }
+
+      @media (max-width: 600px) { .admin-form .lin { grid-template-columns: 1fr; } }
+    </style>
+  </body>
+</html>

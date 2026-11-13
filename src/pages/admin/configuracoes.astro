@@ -1,0 +1,117 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { env } from 'cloudflare:workers';
+import { carregarConfig } from '../../lib/db';
+
+const db = (env as any).DB;
+const cfg = await carregarConfig(db);
+let telefones: string[] = [];
+try { telefones = JSON.parse(cfg.telefones || '[]'); } catch {}
+---
+
+<AdminLayout titulo="Configurações" ativo="config">
+  <div class="painel">
+    <h2>Campanha</h2>
+    <form class="admin-form" id="form-config">
+      <div class="lin">
+        <div><label for="c-nome">Nome da campanha</label><input id="c-nome" value={cfg.campanha_nome || ''} /></div>
+        <div><label for="c-ano">Ano da edição</label><input id="c-ano" value={cfg.campanha_ano || ''} /></div>
+      </div>
+      <div class="lin">
+        <div><label for="c-marca">Marca</label><input id="c-marca" value={cfg.campanha_marca || ''} /></div>
+        <div><label for="c-slogan">Slogan</label><input id="c-slogan" value={cfg.campanha_slogan || ''} /></div>
+      </div>
+      <div><label for="c-descricao">Descrição</label><textarea id="c-descricao">{cfg.campanha_descricao || ''}</textarea></div>
+      <div><label for="c-telefones">Telefones/WhatsApp (um por linha, só números com DDI 55)</label><textarea id="c-telefones">{telefones.join('\n')}</textarea></div>
+
+      <h2 style="margin-top:10px">Contribuição por PIX</h2>
+      <div><label for="c-pix">Chave PIX</label><input id="c-pix" value={cfg.pix_chave || ''} placeholder="e-mail, telefone, CNPJ ou aleatória" /></div>
+      <div>
+        <label>QR Code do PIX</label>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <img id="c-qr-preview" class="thumb" style="width:90px;height:90px" src={cfg.pix_qr_url || ''} alt="" />
+          <div style="flex:1;min-width:200px">
+            <input id="c-qr" value={cfg.pix_qr_url || ''} placeholder="URL da imagem do QR" maxlength="300" />
+            <div style="display:flex;gap:8px;margin-top:6px">
+              <input type="file" id="c-qr-file" accept="image/png,image/jpeg,image/webp" />
+              <button type="button" class="btn-mini" id="btn-upload-qr">Enviar QR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="margin-top:10px">Entrega presencial</h2>
+      <div><label for="c-endereco">Endereço do abrigo</label><textarea id="c-endereco">{cfg.endereco_entrega || ''}</textarea></div>
+      <div><label for="c-orient">Orientações de entrega</label><textarea id="c-orient">{cfg.orientacoes_entrega || ''}</textarea></div>
+
+      <div class="admin-msg" id="msg-config"></div>
+      <div><button type="submit" class="btn btn-primario btn-pequeno">Salvar configurações</button></div>
+    </form>
+  </div>
+
+  <div class="painel">
+    <h2>Trocar minha senha</h2>
+    <form class="admin-form" id="form-senha" style="max-width:420px">
+      <div><label for="s-atual">Senha atual</label><input type="password" id="s-atual" autocomplete="current-password" /></div>
+      <div><label for="s-nova">Nova senha (mín. 6 caracteres)</label><input type="password" id="s-nova" autocomplete="new-password" /></div>
+      <div class="admin-msg" id="msg-senha"></div>
+      <div><button type="submit" class="btn btn-primario btn-pequeno">Alterar senha</button></div>
+    </form>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    function msg(el, t, erro) { el.textContent = t; el.className = 'admin-msg ' + (erro ? 'err' : 'ok'); }
+
+    $('c-qr').addEventListener('input', () => ($('c-qr-preview').src = $('c-qr').value));
+
+    $('btn-upload-qr').addEventListener('click', async () => {
+      const f = $('c-qr-file').files[0];
+      if (!f) return msg($('msg-config'), 'Escolha uma imagem do QR.', true);
+      const fd = new FormData();
+      fd.append('arquivo', f); fd.append('pasta', 'qr');
+      try {
+        const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.erro);
+        $('c-qr').value = d.url; $('c-qr-preview').src = d.url;
+        msg($('msg-config'), 'QR enviado! ✅');
+      } catch (e) { msg($('msg-config'), e.message || 'Falha', true); }
+    });
+
+    $('form-config').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg($('msg-config'), 'Salvando...');
+      const body = {
+        campanha_nome: $('c-nome').value, campanha_ano: $('c-ano').value,
+        campanha_marca: $('c-marca').value, campanha_slogan: $('c-slogan').value,
+        campanha_descricao: $('c-descricao').value,
+        pix_chave: $('c-pix').value, pix_qr_url: $('c-qr').value,
+        endereco_entrega: $('c-endereco').value, orientacoes_entrega: $('c-orient').value,
+        telefones: $('c-telefones').value.split('\n').map((s) => s.trim()).filter(Boolean),
+      };
+      try {
+        const res = await fetch('/api/admin/config', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+        });
+        if (!res.ok) throw new Error((await res.json()).erro);
+        msg($('msg-config'), 'Configurações salvas! ✅');
+      } catch (e) { msg($('msg-config'), e.message || 'Falha', true); }
+    });
+
+    $('form-senha').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg($('msg-senha'), 'Alterando...');
+      try {
+        const res = await fetch('/api/admin/senha', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ atual: $('s-atual').value, nova: $('s-nova').value }),
+        });
+        if (!res.ok) throw new Error((await res.json()).erro);
+        msg($('msg-senha'), 'Senha alterada! ✅');
+        $('form-senha').reset();
+      } catch (e) { msg($('msg-senha'), e.message || 'Falha', true); }
+    });
+  </script>
+</AdminLayout>

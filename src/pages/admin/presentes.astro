@@ -1,0 +1,92 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { env } from 'cloudflare:workers';
+import { STATUS_LABEL, MODALIDADE_LABEL } from '../../lib/db';
+
+const db = (env as any).DB;
+const { results: reservas = [] } = await db
+  .prepare(
+    `SELECT r.codigo, r.status, r.modalidade, r.comprovante_url, r.previsao_entrega, r.criado_em,
+            a.nome AS animal, a.foto,
+            p.nome AS padrinho, p.whatsapp, p.email
+     FROM reservas r
+     JOIN animais a ON a.id = r.animal_id
+     LEFT JOIN padrinhos p ON p.id = r.padrinho_id
+     ORDER BY (r.status='cancelada'), r.criado_em DESC`
+  )
+  .all();
+---
+
+<AdminLayout titulo="Gestão de presentes" ativo="presentes">
+  <div class="painel">
+    <p style="color:#6a7a70;margin-bottom:14px;font-size:.9rem">
+      Nenhuma contribuição é marcada como recebida automaticamente — confirme aqui quando o presente chegar.
+    </p>
+    <div class="tab-wrap">
+      {reservas.length === 0 ? (
+        <p style="color:#6a7a70">Nenhuma reserva ainda.</p>
+      ) : (
+        <table class="tab">
+          <thead>
+            <tr><th>Código</th><th>Animal</th><th>Padrinho</th><th>Contato</th><th>Modalidade</th><th>Comprov.</th><th>Status</th><th>Ações</th></tr>
+          </thead>
+          <tbody>
+            {reservas.map((r: any) => (
+              <tr data-codigo={r.codigo}>
+                <td><b>{r.codigo}</b><br /><small style="color:#889">{r.criado_em?.slice(0, 16)}</small></td>
+                <td>{r.animal}</td>
+                <td>{r.padrinho || '—'}{r.previsao_entrega ? <br /> : null}{r.previsao_entrega ? <small style="color:#889">📅 {r.previsao_entrega}</small> : null}</td>
+                <td style="font-size:.82rem">
+                  {r.whatsapp ? <div>📱 {r.whatsapp}</div> : null}
+                  {r.email ? <div>✉️ {r.email}</div> : null}
+                  {!r.whatsapp && !r.email ? '—' : null}
+                </td>
+                <td>{MODALIDADE_LABEL[r.modalidade] || r.modalidade || '—'}</td>
+                <td>{r.comprovante_url ? <a href={r.comprovante_url} target="_blank" rel="noopener" class="btn-mini">Ver</a> : '—'}</td>
+                <td><span class={`pill s-${r.status}`} data-status>{STATUS_LABEL[r.status] || r.status}</span></td>
+                <td>
+                  <div class="acoes-linha">
+                    {r.status !== 'cancelada' && r.status !== 'presente_recebido' && r.status !== 'concluida' ? (
+                      <button class="btn-mini" data-acao="recebido">✅ Recebido</button>
+                    ) : null}
+                    {r.status === 'presente_recebido' ? (
+                      <button class="btn-mini" data-acao="concluir">🏁 Concluir</button>
+                    ) : null}
+                    {r.status !== 'cancelada' && r.status !== 'concluida' ? (
+                      <button class="btn-mini perigo" data-acao="liberar">↩ Liberar</button>
+                    ) : null}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('button[data-acao]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const tr = btn.closest('tr');
+        const codigo = tr.dataset.codigo;
+        const acao = btn.dataset.acao;
+        if (acao === 'liberar' && !confirm('Liberar esta cartinha? A reserva será cancelada e o animal volta a ficar disponível.')) return;
+        btn.disabled = true;
+        try {
+          const res = await fetch('/api/admin/reserva', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ codigo, acao }),
+          });
+          if (!res.ok) throw new Error();
+          location.reload();
+        } catch {
+          alert('Não foi possível atualizar.');
+          btn.disabled = false;
+        }
+      });
+    });
+  </script>
+</AdminLayout>

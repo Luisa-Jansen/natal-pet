@@ -1,47 +1,56 @@
 # 🎄 Adote uma Carta de Natal PET
 
-Site da campanha **"Adote uma Carta"** do Shopping Cerrado: 83 pets de abrigo
-escreveram cartinhas de Natal e esperam que alguém realize seus pedidos.
+Plataforma da campanha **"Adote uma Carta"** do Shopping Cerrado: pets de abrigo
+escreveram cartinhas de Natal e o visitante pode **se tornar padrinho**, escolher como
+presentear e acompanhar tudo — enquanto o abrigo administra a campanha por um painel próprio.
 
-Versão nova, independente e dinâmica — feita em **Astro + Cloudflare Workers + D1**,
-hospedada no GitHub e publicada no Cloudflare.
+Feita em **Astro + Cloudflare Workers + D1 + R2**, hospedada no GitHub e publicada no Cloudflare.
 
 ## ✨ O que o site faz
 
-- Galeria com os **83 pets**, cada um com foto, história e cartinha completa.
+### Para o visitante (padrinho)
+- Galeria com os pets, cada um com foto, história e cartinha completa.
 - **Busca** por nome/pedido e **filtros** por espécie (cão/gato), tipo de presente e disponibilidade.
-- **Modal** com a cartinha de cada pet.
-- Botão **"Adotar esta carta"**: o padrinho deixa o nome e é levado ao **WhatsApp** com uma mensagem pronta.
-- A adoção é **salva no banco de dados (D1)** — a cartinha passa a aparecer como "realizada" e **não pode ser adotada duas vezes** (contador ao vivo).
+- **Reserva da cartinha dentro do site** (não depende mais de atendimento manual):
+  1. Escolhe o pet → vê a cartinha → **Adotar esta carta**
+  2. Preenche nome, WhatsApp e e-mail
+  3. Escolhe a modalidade: **PIX** (chave + QR + comprovante), **Compra online** (links) ou **Entrega presencial** (endereço)
+  4. Recebe uma **tela de sucesso** com o código da reserva
+- A cartinha vira **Reservada** na hora e some das disponíveis. **Reserva dupla é bloqueada** no banco.
+- Os **contadores são calculados do banco de dados** (nada fixo).
+
+### Para o abrigo (painel administrativo em `/admin`)
+- **Login protegido** por sessão.
+- **Dashboard** com total de animais, disponíveis, reservadas, aguardando presente, recebidos e concluídas.
+- **Animais**: cadastrar, editar, enviar/trocar foto, links de compra, ativar/desativar.
+- **Presentes**: confirmar recebimento, ver comprovantes, concluir e **liberar** cartinhas (desistência).
+- **Padrinhos**: nome, contato, animal, modalidade, status e data.
+- **Configurações**: chave PIX, QR Code, endereço, telefones, textos e **ano da campanha**.
 
 ## 🗂️ Estrutura do projeto
 
 ```
-├── public/pets/            # as 83 fotos dos pets (.png)
+├── public/pets/            # fotos iniciais dos pets (.png)
+├── db/
+│   ├── schema.sql          # todas as tabelas (idempotente)
+│   └── seed.mjs            # gera db/seed.sql a partir de pets.json (83 animais, config, admin)
 ├── src/
-│   ├── data/pets.json      # TODOS os dados: nome, história, cartinha, pedido, foto
-│   ├── config.js           # textos da campanha e números de WhatsApp
-│   ├── lib/categorias.js   # categorias de presente (para os filtros)
-│   ├── layouts/Layout.astro
+│   ├── data/pets.json      # dados originais (fonte do seed + fallback)
+│   ├── config.js           # textos/contatos de fallback
+│   ├── lib/
+│   │   ├── db.ts           # acesso ao banco, status, senhas (PBKDF2)
+│   │   ├── auth.ts         # sessões do admin
+│   │   └── categorias.js   # categorias de presente (filtros)
+│   ├── middleware.ts       # protege /admin e /api/admin
 │   ├── pages/
-│   │   ├── index.astro     # a página inteira (hero, galeria, modal)
-│   │   └── api/
-│   │       ├── status.ts   # GET  -> cartinhas já adotadas
-│   │       └── adotar.ts   # POST -> registra uma adoção
-│   ├── scripts/app.js      # busca, filtros, modal, adoção, contador
-│   └── styles/global.css   # tema de Natal
-├── db/schema.sql           # estrutura da tabela de adoções
-└── wrangler.toml           # configuração do Cloudflare (bindings)
+│   │   ├── index.astro     # home (lê do D1, fallback no JSON)
+│   │   ├── admin/*.astro   # painel (login, dashboard, animais, presentes, padrinhos, configurações)
+│   │   ├── uploads/[...chave].ts   # serve arquivos do R2
+│   │   └── api/            # status, config, reservar, reserva/[codigo], comprovante, admin/*
+│   ├── scripts/            # app.js (site) + admin-animais.js (painel)
+│   └── styles/global.css
+└── wrangler.toml           # bindings do Cloudflare (D1 + R2)
 ```
-
-## ✏️ Como editar o conteúdo
-
-- **Textos da campanha / WhatsApp:** edite `src/config.js`.
-- **Pets (nome, história, cartinha, pedido):** edite `src/data/pets.json`.
-- **Trocar uma foto:** substitua o arquivo em `public/pets/` (mantendo o mesmo nome) ou aponte o campo `foto` no JSON.
-- **Cores / visual:** variáveis de cor no topo de `src/styles/global.css`.
-
-Toda alteração, ao ser enviada para o GitHub, publica sozinha (veja o deploy automático).
 
 ## 💻 Rodar no seu computador
 
@@ -49,60 +58,51 @@ Pré-requisito: [Node.js](https://nodejs.org) 20+.
 
 ```bash
 npm install          # instala as dependências (só na primeira vez)
-npm run db:local     # cria o banco de dados LOCAL (só na primeira vez)
+npm run setup:local  # cria o banco LOCAL + popula os 83 animais, config e admin
 npm run dev          # abre em http://localhost:4321
 ```
 
-## 🚀 Publicar na internet (GitHub + Cloudflare)
+Painel: http://localhost:4321/admin
+- **Login inicial:** `admin@natalpet.com.br` · senha `natal2026`
+- **Troque a senha** no primeiro acesso em **Configurações → Trocar minha senha**.
 
-### 1. Enviar o código para o GitHub
+> Para usar outro e-mail/senha inicial: `ADMIN_EMAIL=... ADMIN_SENHA=... npm run db:seed` antes do `setup:local`.
 
-```bash
-git add .
-git commit -m "Primeira versão do site"
-git push
-```
+## 🚀 Publicar na internet (Cloudflare)
 
-(O repositório já está configurado: `github.com/Luisa-Jansen/natal-pet`.)
-
-### 2. Criar o banco de dados D1 (uma única vez)
-
-Faça login no Cloudflare e crie o banco:
-
+### 1. Criar o bucket de arquivos R2 (uma única vez)
 ```bash
 npx wrangler login
-npm run db:create          # cria o banco e mostra um "database_id"
+npm run r2:create          # cria o bucket "natal-pet-uploads" (fotos e comprovantes)
 ```
 
-Copie o **`database_id`** que apareceu e cole no arquivo `wrangler.toml`,
-no lugar de `COLE-AQUI-O-ID-GERADO-PELO-WRANGLER`. Depois crie a tabela:
-
+### 2. Criar o banco D1 e popular (uma única vez)
+O `database_id` já está no `wrangler.toml`. Se precisar recriar:
 ```bash
-npm run db:remote          # cria a tabela de adoções no banco de produção
+npm run db:create          # mostra um novo database_id (cole no wrangler.toml)
+```
+Aplique o schema e o seed no banco de produção:
+```bash
+npm run setup:remote       # schema + 83 animais + config + admin no banco remoto
 ```
 
-### 3. Conectar o repositório no Cloudflare (deploy automático)
-
-No painel da Cloudflare: **Workers & Pages → Create → Workers → Import a repository**
-e selecione o repositório `natal-pet`. A Cloudflare detecta o Astro sozinho.
-Confirme as configurações:
-
-- **Build command:** `npm run build`
-- **Deploy command:** `npx wrangler deploy`
-
-A partir daí, **todo `git push` publica o site automaticamente**. 🎉
-
-> **Alternativa manual (sem GitHub):** `npm run deploy` publica direto do seu computador.
-
-### 4. Ver quem adotou as cartinhas
-
+### 3. Deploy
 ```bash
-npm run db:adocoes         # lista todas as adoções registradas
+git add . && git commit -m "..." && git push    # se o deploy automático estiver ligado
+# ou, manualmente:
+npm run deploy
+```
+
+### Consultar reservas de produção
+```bash
+npm run db:reservas
 ```
 
 ## 🔧 Observações técnicas
 
-- O site é renderizado estático (rápido, servido pela borda da Cloudflare); apenas
-  as rotas `/api/*` rodam no Worker e falam com o banco D1.
-- `pet_id` é único no banco: garante que cada cartinha só seja adotada uma vez.
-- As fotos foram baixadas para `public/pets/` — o site **não depende** mais do RD Station.
+- As rotas `/api/*`, `/admin/*` e `/uploads/*` rodam no Worker e falam com D1/R2.
+- A home cai para `src/data/pets.json` se o banco estiver indisponível (o site nunca quebra).
+- Reserva dupla é impedida por um índice único parcial em `reservas(animal_id)`.
+- Nenhuma contribuição é marcada como recebida automaticamente — o abrigo confirma no painel.
+- Senhas de admin usam PBKDF2 (WebCrypto), compatível entre o seed (Node) e o Worker.
+- **Editar o conteúdo** agora é pelo painel; `pets.json`/`config.js` servem de base inicial e fallback.

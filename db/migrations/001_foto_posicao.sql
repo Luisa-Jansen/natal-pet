@@ -1,0 +1,11 @@
+-- ============================================================================
+--  Migração 001 — enquadramento configurável das fotos
+--  Adiciona object-position por animal. Rode UMA vez em bancos já existentes.
+--
+--  Local:  wrangler d1 execute natal_pet_db --local  --file=./db/migrations/001_foto_posicao.sql
+--  Remoto: wrangler d1 execute natal_pet_db --remote --file=./db/migrations/001_foto_posicao.sql
+--
+--  Obs.: SQLite não tem "ADD COLUMN IF NOT EXISTS". Se a coluna já existir,
+--  o comando retorna erro "duplicate column name" — pode ignorar com segurança.
+-- ============================================================================
+ALTER TABLE animais ADD COLUMN foto_posicao TEXT DEFAULT '50% 42%';

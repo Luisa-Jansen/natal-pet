@@ -1,12 +1,12 @@
 ---
-export const prerender = true;
+export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../config.js';
 import { categorizar, CATEGORIAS } from '../lib/categorias.js';
 import dados from '../data/pets.json';
-
-const pets = dados.pets;
+import { env } from 'cloudflare:workers';
+import { listarAnimais, carregarConfig, contarPorStatus } from '../lib/db';
 
 // remove acentos para busca sem diferenciar acentuação
 const semAcento = (s) =>
@@ -18,21 +18,67 @@ const especieInfo = {
   indefinido: { label: 'Pet', emoji: '🐾' },
 };
 
-// enriquece cada pet com a categoria do presente
-const petsView = pets.map((p) => ({
+// ---- carrega do banco (D1); se indisponível, cai para o pets.json estático ----
+const db = (env as any)?.DB;
+let animais = [];
+let cfg = {};
+let contagem = null;
+if (db) {
+  try {
+    animais = await listarAnimais(db, { apenasAtivos: true });
+    cfg = await carregarConfig(db);
+    contagem = await contarPorStatus(db);
+  } catch (e) {
+    console.warn('Banco indisponível — usando pets.json como fallback.', e);
+  }
+}
+if (!animais.length) {
+  animais = dados.pets.map((p, i) => ({
+    ...p,
+    especie: p.especie || 'indefinido',
+    categoria: categorizar(p.pedido),
+    status: 'disponivel',
+    ordem: i,
+  }));
+}
+
+// textos/numeros da campanha (config do banco com fallback no config.js)
+const ano = cfg.campanha_ano || SITE.ano;
+const marca = cfg.campanha_marca || SITE.marca;
+const slogan = cfg.campanha_slogan || SITE.slogan;
+const descricao = cfg.campanha_descricao || SITE.descricao;
+let whatsapp = SITE.whatsapp;
+try {
+  if (cfg.telefones) whatsapp = JSON.parse(cfg.telefones);
+} catch {}
+
+// enriquece cada animal para a view
+const petsView = animais.map((p) => ({
   ...p,
-  categoria: categorizar(p.pedido),
+  categoria: p.categoria || categorizar(p.pedido),
   busca: semAcento(`${p.nome} ${p.pedido} ${p.historia}`),
+  indisponivel: !!(p.status && p.status !== 'disponivel'),
+  // posição da foto (object-position) ajustável por animal; padrão enquadra o rosto
+  pos: (p.foto_posicao && String(p.foto_posicao).trim()) || '50% 42%',
 }));
 
 const totalPets = petsView.length;
 const totalCachorros = petsView.filter((p) => p.especie === 'cachorro').length;
 const totalGatos = petsView.filter((p) => p.especie === 'gato').length;
 
-// pet de destaque no hero
-const heroPet = petsView.find((p) => p.id === 'branca') || petsView[0];
+// contadores reais (do banco; fallback calculado da própria view)
+const nIndisponiveis = contagem
+  ? totalPets - contagem.disponivel
+  : petsView.filter((p) => p.indisponivel).length;
+const nDisponiveis = totalPets - nIndisponiveis;
 
-// dados enviados ao cliente (para o modal)
+// pet de destaque no hero (prioriza um disponível)
+const heroPet =
+  petsView.find((p) => p.id === 'branca' && !p.indisponivel) ||
+  petsView.find((p) => !p.indisponivel) ||
+  petsView[0];
+
+// dados enviados ao cliente (para o modal e o fluxo de adoção)
 const petsClient = petsView.map((p) => ({
   id: p.id,
   nome: p.nome,
@@ -40,8 +86,9 @@ const petsClient = petsView.map((p) => ({
   pedido: p.pedido,
   cartinha: p.cartinha,
   foto: p.foto,
+  pos: p.pos,
 }));
-const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
+const configClient = { whatsapp, marca };
 ---
 
 <Layout>
@@ -50,10 +97,10 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
     <div class="container cabecalho-inner">
       <a href="#topo" class="logo">
         <span class="emoji">🎄</span>
-        <span>Adote uma Carta<br /><small style="font-weight:400;color:var(--tinta-suave);font-size:.72rem">{SITE.marca}</small></span>
+        <span>Adote uma Carta<br /><small style="font-weight:400;color:var(--tinta-suave);font-size:.72rem">{marca}</small></span>
       </a>
       <span class="chip-contador">
-        🎁 <b id="chip-num">0</b>&nbsp;cartinhas já realizadas
+        🎁 <b id="chip-num">{nIndisponiveis}</b>&nbsp;cartinhas já realizadas
       </span>
     </div>
   </header>
@@ -62,12 +109,12 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
   <section class="hero" id="topo">
     <div class="container hero-grid">
       <div>
-        <span class="hero-selo">✨ Campanha de Natal {SITE.ano} · {SITE.marca}</span>
+        <span class="hero-selo">✨ Campanha de Natal {ano} · {marca}</span>
         <h1>Realize o <span class="destaque">desejo</span> de um pet neste Natal</h1>
-        <p class="sub">{SITE.descricao}</p>
+        <p class="sub">{descricao}</p>
         <div class="hero-ctas">
-          <a href="#cartinhas" class="btn btn-primario">💌 Ver as cartinhas</a>
-          <a href="#como" class="btn btn-fantasma" style="color:#fff;border-color:rgba(255,255,255,.6)">Como funciona</a>
+          <a href="#cartinhas" class="btn btn-claro">💌 Ver as cartinhas</a>
+          <a href="#como" class="btn btn-fantasma" style="color:#fff;border-color:rgba(255,255,255,.45)">Como funciona</a>
         </div>
         <div class="stats">
           <div class="stat">
@@ -75,18 +122,18 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
             <div class="rot">cartinhas de pets</div>
           </div>
           <div class="stat">
-            <div class="num" id="stat-adotadas">0</div>
+            <div class="num" id="stat-adotadas">{nIndisponiveis}</div>
             <div class="rot">já realizadas</div>
           </div>
           <div class="stat">
-            <div class="num" id="stat-disponiveis">{totalPets}</div>
+            <div class="num" id="stat-disponiveis">{nDisponiveis}</div>
             <div class="rot">esperando um padrinho</div>
           </div>
         </div>
       </div>
       <div class="hero-card">
-        <img src={heroPet.foto} alt={`Foto de ${heroPet.nome}`} width="340" height="255" />
-        <div class="legenda">"{heroPet.nome} está esperando por você 🐾"</div>
+        <img src={heroPet.foto} alt={`Foto de ${heroPet.nome}`} width="340" height="255" style={`object-position:${heroPet.pos}`} />
+        <div class="legenda">{heroPet.nome} está esperando por você 🐾</div>
       </div>
     </div>
   </section>
@@ -109,13 +156,13 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
           <span class="numero">2</span>
           <div class="ic">🎁</div>
           <h3>Garanta o presentinho</h3>
-          <p>Clique em “Adotar esta carta”, deixe seu nome e combine tudo pelo WhatsApp.</p>
+          <p>Clique em “Adotar esta carta”, faça sua reserva e escolha como presentear.</p>
         </div>
         <div class="passo">
           <span class="numero">3</span>
           <div class="ic">🐾</div>
           <h3>Leve alegria</h3>
-          <p>Entregue o presente e faça o Natal de um focinho muito mais feliz.</p>
+          <p>Conclua sua contribuição e faça o Natal de um focinho muito mais feliz.</p>
         </div>
       </div>
     </div>
@@ -159,21 +206,24 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
       <div class="grade" id="grade">
         {petsView.map((p) => {
           const info = especieInfo[p.especie] || especieInfo.indefinido;
-          const cat = CATEGORIAS[p.categoria];
+          const cat = CATEGORIAS[p.categoria] || CATEGORIAS.outros;
           return (
             <article
-              class="card"
+              class={`card${p.indisponivel ? ' adotada' : ''}`}
               data-id={p.id}
               data-especie={p.especie}
               data-categoria={p.categoria}
+              data-status={p.status}
               data-busca={p.busca}
+              style={`--pos:${p.pos}`}
               tabindex="0"
               role="button"
               aria-label={`Ver cartinha de ${p.nome}`}
             >
               <div class="card-foto">
-                <img src={p.foto} alt={`Foto de ${p.nome}`} loading="lazy" width="300" height="300" />
+                <img src={p.foto} alt={`Foto de ${p.nome}`} loading="lazy" width="320" height="240" />
                 <span class="badge-especie">{info.emoji} {info.label}</span>
+                <span class="badge-status disp">Disponível</span>
                 <span class="selo-adotada">Realizada ✓</span>
               </div>
               <div class="card-corpo">
@@ -199,16 +249,24 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
   <!-- RODAPÉ -->
   <footer class="rodape" id="contato">
     <div class="container rodape-grid">
-      <div>
-        <h3>Feliz Natal, com amor 🐾</h3>
-        <p style="max-width:48ch">
-          A campanha <b>Adote uma Carta</b> é uma realização do {SITE.marca}. Cada presente entregue
-          é um gesto de carinho por quem só espera por um lar. {SITE.slogan}.
+      <div class="rodape-col">
+        <h3>Adote uma Carta 🐾</h3>
+        <p>
+          Uma campanha de Natal do {marca}. Cada cartinha é o pedido de um pet
+          de abrigo — e cada presente, um gesto de carinho por quem só espera por um lar.
         </p>
       </div>
-      <div>
-        <strong style="color:#fff">Fale com a gente</strong>
-        {SITE.whatsapp.map((n) => (
+      <div class="rodape-col">
+        <strong>A campanha</strong>
+        <div class="rodape-info">
+          <span class="dourado">{marca}</span>
+          <span>{slogan}</span>
+          <span>Natal {ano}</span>
+        </div>
+      </div>
+      <div class="rodape-col">
+        <strong>Fale com a gente</strong>
+        {whatsapp.map((n) => (
           <a class="wa" href={`https://wa.me/${n}`} target="_blank" rel="noopener">
             📱 +{n.replace(/^55/, '55 ')}
           </a>
@@ -216,7 +274,7 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
       </div>
     </div>
     <div class="container rodape-base">
-      © {SITE.ano} {SITE.marca} — {SITE.slogan}. Todas as fotos e histórias pertencem à campanha.
+      © {ano} {marca} — {slogan}. Todas as fotos e histórias pertencem à campanha.
     </div>
   </footer>
 
@@ -230,40 +288,126 @@ const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
       <div class="modal-conteudo">
         <h2 id="modal-nome"></h2>
         <div class="modal-especie" id="modal-especie"></div>
-        <div class="carta" id="modal-carta"></div>
-        <div class="pedido-destaque">
-          <span class="lab">🎁 Presente de Natal desejado</span>
-          <span id="modal-pedido"></span>
+
+        <!-- ETAPA 1 · CARTINHA -->
+        <div class="tela ativa" data-tela="carta">
+          <div class="carta" id="modal-carta"></div>
+          <div class="pedido-destaque">
+            <span class="lab">🎁 Presente de Natal desejado</span>
+            <span id="modal-pedido"></span>
+          </div>
+          <div class="modal-acoes" id="acoes">
+            <button class="btn btn-vermelho" id="btn-adotar">💝 Adotar esta carta</button>
+            <span id="aviso-adotada" style="display:none;text-align:center;color:var(--verde);font-weight:600">
+              🎉 Esta cartinha já foi reservada. Que tal escolher outra?
+            </span>
+          </div>
         </div>
 
-        <!-- ações iniciais -->
-        <div class="modal-acoes" id="acoes">
-          <button class="btn btn-primario" id="btn-adotar">💝 Adotar esta carta</button>
-          <span id="aviso-adotada" style="display:none;text-align:center;color:var(--verde);font-weight:600">
-            🎉 Esta cartinha já foi realizada. Que tal escolher outra?
-          </span>
+        <!-- ETAPA 2 · CADASTRO + MODALIDADE -->
+        <div class="tela" data-tela="cadastro">
+          <form id="form-cadastro">
+            <p class="passo-ind">Passo 1 de 2 · Seus dados</p>
+            <div class="campo">
+              <label for="f-nome">Nome completo *</label>
+              <input type="text" id="f-nome" name="nome" required maxlength="80" placeholder="Seu nome completo" />
+            </div>
+            <div class="form-linha">
+              <div class="campo">
+                <label for="f-whatsapp">WhatsApp *</label>
+                <input type="tel" id="f-whatsapp" name="whatsapp" maxlength="40" placeholder="(62) 90000-0000" />
+              </div>
+              <div class="campo">
+                <label for="f-email">E-mail</label>
+                <input type="email" id="f-email" name="email" maxlength="120" placeholder="voce@email.com" />
+              </div>
+            </div>
+
+            <p class="passo-ind">Passo 2 de 2 · Como quer presentear?</p>
+            <div class="modalidades" role="radiogroup" aria-label="Modalidade de presente">
+              <label class="modalidade-op">
+                <input type="radio" name="modalidade" value="pix" required />
+                <span class="mo-card"><span class="mo-ic">💠</span><b>PIX</b><small>Contribua com um valor por PIX</small></span>
+              </label>
+              <label class="modalidade-op">
+                <input type="radio" name="modalidade" value="compra_online" />
+                <span class="mo-card"><span class="mo-ic">🛒</span><b>Compra online</b><small>Compre o presente pela internet</small></span>
+              </label>
+              <label class="modalidade-op">
+                <input type="radio" name="modalidade" value="entrega_presencial" />
+                <span class="mo-card"><span class="mo-ic">📦</span><b>Entrega presencial</b><small>Leve o presente até o abrigo</small></span>
+              </label>
+            </div>
+
+            <div class="form-erro" id="form-erro"></div>
+            <button type="submit" class="btn btn-primario" id="btn-confirmar-reserva">💝 Confirmar reserva</button>
+            <button type="button" class="btn btn-fantasma" data-voltar="carta">Voltar</button>
+          </form>
         </div>
 
-        <!-- formulário de adoção -->
-        <form class="form-adocao" id="form-adocao">
-          <div class="campo">
-            <label for="f-nome">Seu nome *</label>
-            <input type="text" id="f-nome" name="nome" required maxlength="80" placeholder="Como podemos te chamar?" />
-          </div>
-          <div class="form-linha">
-            <div class="campo">
-              <label for="f-contato">WhatsApp ou e-mail</label>
-              <input type="text" id="f-contato" name="contato" maxlength="80" placeholder="(62) 90000-0000" />
+        <!-- ETAPA 3 · PIX -->
+        <div class="tela" data-tela="pix">
+          <div class="box-modalidade">
+            <h3>💠 Contribua por PIX</h3>
+            <p class="ajuda">Use a chave abaixo (ou o QR Code) e, se puder, envie o comprovante para agilizarmos a confirmação.</p>
+            <div class="pix-chave-wrap" id="pix-chave-wrap">
+              <code id="pix-chave"></code>
+              <button type="button" class="btn btn-pequeno" id="btn-copiar-pix">Copiar</button>
             </div>
-            <div class="campo">
-              <label for="f-cidade">Cidade</label>
-              <input type="text" id="f-cidade" name="cidade" maxlength="60" placeholder="Goiânia" />
+            <img id="pix-qr" class="pix-qr" src="" alt="QR Code do PIX" style="display:none" />
+            <p class="pix-sem" id="pix-sem" style="display:none">A chave PIX ainda não foi cadastrada. Fale com a gente pelo WhatsApp.</p>
+
+            <div class="comprovante">
+              <label for="f-comprovante">Enviar comprovante (opcional)</label>
+              <input type="file" id="f-comprovante" accept="image/png,image/jpeg,image/webp,application/pdf" />
+              <button type="button" class="btn btn-whatsapp btn-pequeno" id="btn-enviar-comprovante">📎 Enviar comprovante</button>
+              <span class="comprovante-status" id="comprovante-status"></span>
             </div>
           </div>
-          <div class="form-erro" id="form-erro"></div>
-          <button type="submit" class="btn btn-whatsapp" id="btn-confirmar">✅ Confirmar e abrir o WhatsApp</button>
-          <button type="button" class="btn btn-fantasma" id="btn-voltar">Voltar</button>
-        </form>
+          <button type="button" class="btn btn-primario" data-ir="sucesso">Concluir</button>
+          <button type="button" class="btn btn-fantasma" data-voltar="cadastro">Voltar</button>
+        </div>
+
+        <!-- ETAPA 4 · COMPRA ONLINE -->
+        <div class="tela" data-tela="compra">
+          <div class="box-modalidade">
+            <h3>🛒 Compre o presente online</h3>
+            <p class="ajuda">Escolha um dos links abaixo. A loja abre em outra janela. Depois, registre seu compromisso.</p>
+            <div class="compra-links" id="compra-links"></div>
+            <p class="compra-sem" id="compra-sem" style="display:none">Ainda não há links cadastrados para esta cartinha — você pode combinar a compra pelo WhatsApp.</p>
+          </div>
+          <button type="button" class="btn btn-primario" id="btn-compra-registrar">✅ Registrar meu compromisso</button>
+          <button type="button" class="btn btn-fantasma" data-voltar="cadastro">Voltar</button>
+        </div>
+
+        <!-- ETAPA 5 · ENTREGA PRESENCIAL -->
+        <div class="tela" data-tela="presencial">
+          <div class="box-modalidade">
+            <h3>📦 Entrega presencial</h3>
+            <p class="ajuda" id="presencial-orientacoes"></p>
+            <div class="endereco-box" id="presencial-endereco"></div>
+            <div class="campo">
+              <label for="f-previsao">Quando pretende entregar? (opcional)</label>
+              <input type="text" id="f-previsao" maxlength="40" placeholder="Ex.: até 20/12 ou neste sábado" />
+            </div>
+          </div>
+          <button type="button" class="btn btn-primario" id="btn-presencial-registrar">✅ Registrar previsão de entrega</button>
+          <button type="button" class="btn btn-fantasma" data-voltar="cadastro">Voltar</button>
+        </div>
+
+        <!-- ETAPA 6 · SUCESSO -->
+        <div class="tela tela-sucesso" data-tela="sucesso">
+          <div class="sucesso-selo">🎉</div>
+          <h3>Reserva confirmada!</h3>
+          <p class="sucesso-sub" id="suc-sub"></p>
+          <div class="sucesso-info">
+            <div><span class="lab">Código da reserva</span><b id="suc-codigo"></b></div>
+            <div><span class="lab">Modalidade</span><b id="suc-modalidade"></b></div>
+          </div>
+          <div class="sucesso-orient" id="suc-orientacoes"></div>
+          <button type="button" class="btn btn-whatsapp" id="btn-whatsapp-share">📲 Compartilhar no WhatsApp</button>
+          <button type="button" class="btn btn-fantasma" id="btn-fechar-sucesso">Fechar</button>
+        </div>
       </div>
     </div>
   </div>

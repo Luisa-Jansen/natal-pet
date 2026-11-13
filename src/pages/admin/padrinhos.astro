@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { env } from 'cloudflare:workers';
+import { STATUS_LABEL, MODALIDADE_LABEL } from '../../lib/db';
+
+const db = (env as any).DB;
+// padrinhos com a reserva vinculada (quando houver)
+const { results: linhas = [] } = await db
+  .prepare(
+    `SELECT p.nome, p.whatsapp, p.email, p.criado_em,
+            r.codigo, r.modalidade, r.status, a.nome AS animal
+     FROM padrinhos p
+     LEFT JOIN reservas r ON r.padrinho_id = p.id
+     LEFT JOIN animais a ON a.id = r.animal_id
+     ORDER BY p.criado_em DESC`
+  )
+  .all();
+---
+
+<AdminLayout titulo="Gestão de padrinhos" ativo="padrinhos">
+  <div class="painel">
+    <h2>{linhas.length} registros</h2>
+    <div class="tab-wrap">
+      {linhas.length === 0 ? (
+        <p style="color:#6a7a70">Nenhum padrinho cadastrado ainda.</p>
+      ) : (
+        <table class="tab">
+          <thead>
+            <tr><th>Nome</th><th>WhatsApp</th><th>E-mail</th><th>Animal</th><th>Modalidade</th><th>Status</th><th>Reserva</th><th>Data</th></tr>
+          </thead>
+          <tbody>
+            {linhas.map((l: any) => (
+              <tr>
+                <td><b>{l.nome}</b></td>
+                <td>{l.whatsapp ? <a href={`https://wa.me/${String(l.whatsapp).replace(/\D/g, '')}`} target="_blank" rel="noopener">{l.whatsapp}</a> : '—'}</td>
+                <td>{l.email || '—'}</td>
+                <td>{l.animal || '—'}</td>
+                <td>{MODALIDADE_LABEL[l.modalidade] || l.modalidade || '—'}</td>
+                <td>{l.status ? <span class={`pill s-${l.status}`}>{STATUS_LABEL[l.status] || l.status}</span> : '—'}</td>
+                <td>{l.codigo || '—'}</td>
+                <td>{l.criado_em?.slice(0, 16)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  </div>
+</AdminLayout>
