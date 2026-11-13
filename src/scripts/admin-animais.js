@@ -139,7 +139,7 @@ $('btn-upload-foto').addEventListener('click', async () => {
     $('a-foto').value = d.url;
     $('a-foto-preview').src = d.url;
     if (enquadraImg) enquadraImg.src = d.url;
-    setMsg('Foto enviada! ✅');
+    setMsg('Foto enviada!');
   } catch (e) {
     setMsg(e.message, true);
   } finally {

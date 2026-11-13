@@ -7,11 +7,11 @@ interface Props {
 const { titulo, ativo = '' } = Astro.props;
 const admin = Astro.locals.admin;
 const itens = [
-  { href: '/admin', chave: 'dashboard', rot: '📊 Painel' },
-  { href: '/admin/animais', chave: 'animais', rot: '🐾 Animais' },
-  { href: '/admin/presentes', chave: 'presentes', rot: '🎁 Presentes' },
-  { href: '/admin/padrinhos', chave: 'padrinhos', rot: '💝 Padrinhos' },
-  { href: '/admin/configuracoes', chave: 'config', rot: '⚙️ Configurações' },
+  { href: '/admin', chave: 'dashboard', rot: 'Painel' },
+  { href: '/admin/animais', chave: 'animais', rot: 'Animais' },
+  { href: '/admin/presentes', chave: 'presentes', rot: 'Presentes' },
+  { href: '/admin/padrinhos', chave: 'padrinhos', rot: 'Padrinhos' },
+  { href: '/admin/configuracoes', chave: 'config', rot: 'Configurações' },
 ];
 ---
 
@@ -21,7 +21,7 @@ const itens = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{titulo} — Painel Natal PET</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><g fill='%231f5a3d'><ellipse cx='16' cy='21' rx='7' ry='5.5'/><circle cx='8.5' cy='13' r='3'/><circle cx='23.5' cy='13' r='3'/><circle cx='13' cy='8' r='2.6'/><circle cx='19' cy='8' r='2.6'/></g></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -29,7 +29,7 @@ const itens = [
   <body class="admin-body">
     <header class="admin-topo">
       <div class="admin-topo-inner">
-        <a href="/admin" class="admin-logo">🎄 Natal PET <small>Painel</small></a>
+        <a href="/admin" class="admin-logo">Natal PET <small>Painel</small></a>
         <nav class="admin-nav">
           {itens.map((i) => (
             <a href={i.href} class={ativo === i.chave ? 'on' : ''}>{i.rot}</a>

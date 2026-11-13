@@ -21,8 +21,8 @@ const conteudo = document.querySelector('.modal-conteudo');
 
 const filtros = { especie: 'todos', categoria: 'todos', status: 'todos', texto: '' };
 
-const especieLabel = { cachorro: 'Cachorro 🐶', gato: 'Gato 🐱', indefinido: 'Pet 🐾' };
-const modalidadeLabel = { pix: 'PIX 💠', compra_online: 'Compra online 🛒', entrega_presencial: 'Entrega presencial 📦' };
+const especieLabel = { cachorro: 'Cachorro', gato: 'Gato', indefinido: 'Pet' };
+const modalidadeLabel = { pix: 'PIX', compra_online: 'Compra online', entrega_presencial: 'Entrega presencial' };
 const semAcento = (s) => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const $ = (id) => document.getElementById(id);
 
@@ -237,7 +237,7 @@ $('form-cadastro').addEventListener('submit', async (e) => {
       marcarAdotada(petAtual.id);
       atualizarContadores();
       aplicarFiltros();
-      toast(data.erro || 'Essa cartinha acabou de ser reservada. Escolha outra 💚', true);
+      toast(data.erro || 'Essa cartinha acabou de ser reservada. Escolha outra.', true);
       fecharModal();
       return;
     }
@@ -254,7 +254,7 @@ $('form-cadastro').addEventListener('submit', async (e) => {
     mostrarErro('Não foi possível reservar agora. Tente novamente em instantes.');
   } finally {
     btn.disabled = false;
-    btn.textContent = '💝 Confirmar reserva';
+    btn.textContent = 'Confirmar reserva';
   }
 });
 
@@ -288,7 +288,7 @@ async function irParaModalidade(modalidade) {
         a.target = '_blank';
         a.rel = 'noopener';
         a.className = 'btn btn-whatsapp btn-link-compra';
-        a.textContent = '🛒 ' + (l.label || 'Comprar presente');
+        a.textContent = l.label || 'Comprar presente';
         cont.appendChild(a);
       });
     } else {
@@ -321,7 +321,7 @@ $('btn-copiar-pix').addEventListener('click', async () => {
   const chave = $('pix-chave').textContent;
   try {
     await navigator.clipboard.writeText(chave);
-    toast('Chave PIX copiada! 💠');
+    toast('Chave PIX copiada!');
   } catch {
     toast('Copie a chave manualmente.', true);
   }
@@ -345,7 +345,7 @@ $('btn-enviar-comprovante').addEventListener('click', async () => {
     const res = await fetch('/api/comprovante', { method: 'POST', body: fd });
     const d = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(d.erro || 'Falha');
-    $('comprovante-status').textContent = '✅ Comprovante enviado! Aguardando confirmação do abrigo.';
+    $('comprovante-status').textContent = 'Comprovante enviado! Aguardando confirmação do abrigo.';
     atualizarStatusCartinha(petAtual && petAtual.id, 'aguardando_presente');
   } catch (err) {
     $('comprovante-status').textContent = 'Não foi possível enviar: ' + (err.message || 'tente de novo.');
@@ -399,7 +399,7 @@ obsSucesso.observe(conteudo.querySelector('[data-tela="sucesso"]'), {
 
 function preencherSucesso() {
   if (!reservaAtual || !petAtual) return;
-  $('suc-sub').textContent = `Você é padrinho(a) do(a) ${petAtual.nome}! 🐾`;
+  $('suc-sub').textContent = `Você é padrinho(a) do(a) ${petAtual.nome}!`;
   $('suc-codigo').textContent = reservaAtual.codigo;
   $('suc-modalidade').textContent = modalidadeLabel[reservaAtual.modalidade] || reservaAtual.modalidade;
   $('suc-orientacoes').textContent = orientacaoPara(reservaAtual.modalidade);
@@ -407,10 +407,10 @@ function preencherSucesso() {
 
 function orientacaoPara(modalidade) {
   if (modalidade === 'pix')
-    return 'Assim que o abrigo confirmar seu PIX, a cartinha ganha o selo de presente recebido. Guarde o código da reserva. 💚';
+    return 'Assim que o abrigo confirmar seu PIX, a cartinha ganha o selo de presente recebido. Guarde o código da reserva.';
   if (modalidade === 'compra_online')
-    return 'Compromisso registrado! Finalize a compra pelo link escolhido. O abrigo confirma quando o presente chegar. 💚';
-  return 'Previsão registrada! Leve o presente até o abrigo no período combinado. O abrigo confirma o recebimento. 💚';
+    return 'Compromisso registrado! Finalize a compra pelo link escolhido. O abrigo confirma quando o presente chegar.';
+  return 'Previsão registrada! Leve o presente até o abrigo no período combinado. O abrigo confirma o recebimento.';
 }
 
 // compartilhar no WhatsApp (canal complementar, nunca obrigatório)
@@ -419,10 +419,10 @@ $('btn-whatsapp-share').addEventListener('click', () => {
   const num = (CAMPANHA && CAMPANHA.telefones && CAMPANHA.telefones[0]) || (CONFIG.whatsapp && CONFIG.whatsapp[0]);
   const marca = (CAMPANHA && CAMPANHA.marca) || CONFIG.marca || '';
   const msg =
-    `Olá! 🎄 Acabei de apadrinhar a cartinha do(a) *${petAtual.nome}* na campanha "Adote uma Carta"${marca ? ' do ' + marca : ''}.\n` +
+    `Olá! Acabei de apadrinhar a cartinha do(a) *${petAtual.nome}* na campanha "Adote uma Carta"${marca ? ' do ' + marca : ''}.\n` +
     `Quero presentear com: ${petAtual.pedido}.\n` +
     `Código da minha reserva: ${reservaAtual.codigo}.\n` +
-    `Modalidade escolhida: ${modalidadeLabel[reservaAtual.modalidade] || reservaAtual.modalidade}. 🐾`;
+    `Modalidade escolhida: ${modalidadeLabel[reservaAtual.modalidade] || reservaAtual.modalidade}.`;
   if (num) window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   else toast('WhatsApp não configurado.', true);
 });

@@ -13,9 +13,9 @@ const semAcento = (s) =>
   (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
 const especieInfo = {
-  cachorro: { label: 'Cachorro', emoji: '🐶' },
-  gato: { label: 'Gato', emoji: '🐱' },
-  indefinido: { label: 'Pet', emoji: '🐾' },
+  cachorro: { label: 'Cachorro' },
+  gato: { label: 'Gato' },
+  indefinido: { label: 'Pet' },
 };
 
 // ---- carrega do banco (D1); se indisponível, cai para o pets.json estático ----
@@ -96,11 +96,10 @@ const configClient = { whatsapp, marca };
   <header class="cabecalho">
     <div class="container cabecalho-inner">
       <a href="#topo" class="logo">
-        <span class="emoji">🎄</span>
         <span>Adote uma Carta<br /><small style="font-weight:400;color:var(--tinta-suave);font-size:.72rem">{marca}</small></span>
       </a>
       <span class="chip-contador">
-        🎁 <b id="chip-num">{nIndisponiveis}</b>&nbsp;cartinhas já realizadas
+        <b id="chip-num">{nIndisponiveis}</b>&nbsp;cartinhas já realizadas
       </span>
     </div>
   </header>
@@ -109,11 +108,11 @@ const configClient = { whatsapp, marca };
   <section class="hero" id="topo">
     <div class="container hero-grid">
       <div>
-        <span class="hero-selo">✨ Campanha de Natal {ano} · {marca}</span>
+        <span class="hero-selo">Campanha de Natal {ano} · {marca}</span>
         <h1>Realize o <span class="destaque">desejo</span> de um pet neste Natal</h1>
         <p class="sub">{descricao}</p>
         <div class="hero-ctas">
-          <a href="#cartinhas" class="btn btn-claro">💌 Ver as cartinhas</a>
+          <a href="#cartinhas" class="btn btn-claro">Ver as cartinhas</a>
           <a href="#como" class="btn btn-fantasma" style="color:#fff;border-color:rgba(255,255,255,.45)">Como funciona</a>
         </div>
         <div class="stats">
@@ -133,7 +132,7 @@ const configClient = { whatsapp, marca };
       </div>
       <div class="hero-card">
         <img src={heroPet.foto} alt={`Foto de ${heroPet.nome}`} width="340" height="255" style={`object-position:${heroPet.pos}`} />
-        <div class="legenda">{heroPet.nome} está esperando por você 🐾</div>
+        <div class="legenda">{heroPet.nome} está esperando por você</div>
       </div>
     </div>
   </section>
@@ -148,19 +147,16 @@ const configClient = { whatsapp, marca };
       <div class="passos">
         <div class="passo">
           <span class="numero">1</span>
-          <div class="ic">💌</div>
           <h3>Escolha uma cartinha</h3>
           <p>Leia as histórias e descubra qual pedido de Natal você quer realizar.</p>
         </div>
         <div class="passo">
           <span class="numero">2</span>
-          <div class="ic">🎁</div>
           <h3>Garanta o presentinho</h3>
           <p>Clique em “Adotar esta carta”, faça sua reserva e escolha como presentear.</p>
         </div>
         <div class="passo">
           <span class="numero">3</span>
-          <div class="ic">🐾</div>
           <h3>Leve alegria</h3>
           <p>Conclua sua contribuição e faça o Natal de um focinho muito mais feliz.</p>
         </div>
@@ -179,18 +175,17 @@ const configClient = { whatsapp, marca };
       <!-- FILTROS -->
       <div class="filtros" role="search">
         <div class="busca">
-          🔍
           <input type="search" id="busca" placeholder="Buscar por nome ou pedido..." aria-label="Buscar cartinha" />
         </div>
         <div class="grupo-filtro" id="filtro-especie" role="group" aria-label="Filtrar por tipo">
           <button class="pilula" data-f="especie" data-v="todos" aria-pressed="true">Todos</button>
-          <button class="pilula" data-f="especie" data-v="cachorro" aria-pressed="false">🐶 Cães ({totalCachorros})</button>
-          <button class="pilula" data-f="especie" data-v="gato" aria-pressed="false">🐱 Gatos ({totalGatos})</button>
+          <button class="pilula" data-f="especie" data-v="cachorro" aria-pressed="false">Cães ({totalCachorros})</button>
+          <button class="pilula" data-f="especie" data-v="gato" aria-pressed="false">Gatos ({totalGatos})</button>
         </div>
         <div class="grupo-filtro" id="filtro-categoria" role="group" aria-label="Filtrar por presente">
-          <button class="pilula" data-f="categoria" data-v="todos" aria-pressed="true">🎁 Todos os presentes</button>
+          <button class="pilula" data-f="categoria" data-v="todos" aria-pressed="true">Todos os presentes</button>
           {Object.entries(CATEGORIAS).map(([k, c]) => (
-            <button class="pilula" data-f="categoria" data-v={k} aria-pressed="false">{c.emoji} {c.label}</button>
+            <button class="pilula" data-f="categoria" data-v={k} aria-pressed="false">{c.label}</button>
           ))}
         </div>
         <div class="grupo-filtro" id="filtro-status" role="group" aria-label="Filtrar por disponibilidade">
@@ -222,15 +217,15 @@ const configClient = { whatsapp, marca };
             >
               <div class="card-foto">
                 <img src={p.foto} alt={`Foto de ${p.nome}`} loading="lazy" width="320" height="240" />
-                <span class="badge-especie">{info.emoji} {info.label}</span>
+                <span class="badge-especie">{info.label}</span>
                 <span class="badge-status disp">Disponível</span>
-                <span class="selo-adotada">Realizada ✓</span>
+                <span class="selo-adotada">Realizada</span>
               </div>
               <div class="card-corpo">
                 <h3>{p.nome}</h3>
                 <p class="card-pedido"><span class="lab">Pede de Natal:</span> {p.pedido}</p>
                 <div class="card-rodape">
-                  <span class="tag-presente">{cat.emoji} {cat.label}</span>
+                  <span class="tag-presente">{cat.label}</span>
                   <span class="ver-mais">ver cartinha →</span>
                 </div>
               </div>
@@ -240,7 +235,6 @@ const configClient = { whatsapp, marca };
       </div>
 
       <div class="vazio" id="vazio" style="display:none">
-        <div class="ic">🔍🎄</div>
         <p>Nenhuma cartinha encontrada com esses filtros.<br />Tente outra busca!</p>
       </div>
     </div>
@@ -250,7 +244,7 @@ const configClient = { whatsapp, marca };
   <footer class="rodape" id="contato">
     <div class="container rodape-grid">
       <div class="rodape-col">
-        <h3>Adote uma Carta 🐾</h3>
+        <h3>Adote uma Carta</h3>
         <p>
           Uma campanha de Natal do {marca}. Cada cartinha é o pedido de um pet
           de abrigo — e cada presente, um gesto de carinho por quem só espera por um lar.
@@ -268,7 +262,7 @@ const configClient = { whatsapp, marca };
         <strong>Fale com a gente</strong>
         {whatsapp.map((n) => (
           <a class="wa" href={`https://wa.me/${n}`} target="_blank" rel="noopener">
-            📱 +{n.replace(/^55/, '55 ')}
+            +{n.replace(/^55/, '55 ')}
           </a>
         ))}
       </div>
@@ -293,13 +287,13 @@ const configClient = { whatsapp, marca };
         <div class="tela ativa" data-tela="carta">
           <div class="carta" id="modal-carta"></div>
           <div class="pedido-destaque">
-            <span class="lab">🎁 Presente de Natal desejado</span>
+            <span class="lab">Presente de Natal desejado</span>
             <span id="modal-pedido"></span>
           </div>
           <div class="modal-acoes" id="acoes">
-            <button class="btn btn-vermelho" id="btn-adotar">💝 Adotar esta carta</button>
+            <button class="btn btn-vermelho" id="btn-adotar">Adotar esta carta</button>
             <span id="aviso-adotada" style="display:none;text-align:center;color:var(--verde);font-weight:600">
-              🎉 Esta cartinha já foi reservada. Que tal escolher outra?
+              Esta cartinha já foi reservada. Que tal escolher outra?
             </span>
           </div>
         </div>
@@ -327,20 +321,20 @@ const configClient = { whatsapp, marca };
             <div class="modalidades" role="radiogroup" aria-label="Modalidade de presente">
               <label class="modalidade-op">
                 <input type="radio" name="modalidade" value="pix" required />
-                <span class="mo-card"><span class="mo-ic">💠</span><b>PIX</b><small>Contribua com um valor por PIX</small></span>
+                <span class="mo-card"><b>PIX</b><small>Contribua com um valor por PIX</small></span>
               </label>
               <label class="modalidade-op">
                 <input type="radio" name="modalidade" value="compra_online" />
-                <span class="mo-card"><span class="mo-ic">🛒</span><b>Compra online</b><small>Compre o presente pela internet</small></span>
+                <span class="mo-card"><b>Compra online</b><small>Compre o presente pela internet</small></span>
               </label>
               <label class="modalidade-op">
                 <input type="radio" name="modalidade" value="entrega_presencial" />
-                <span class="mo-card"><span class="mo-ic">📦</span><b>Entrega presencial</b><small>Leve o presente até o abrigo</small></span>
+                <span class="mo-card"><b>Entrega presencial</b><small>Leve o presente até o abrigo</small></span>
               </label>
             </div>
 
             <div class="form-erro" id="form-erro"></div>
-            <button type="submit" class="btn btn-primario" id="btn-confirmar-reserva">💝 Confirmar reserva</button>
+            <button type="submit" class="btn btn-primario" id="btn-confirmar-reserva">Confirmar reserva</button>
             <button type="button" class="btn btn-fantasma" data-voltar="carta">Voltar</button>
           </form>
         </div>
@@ -348,7 +342,7 @@ const configClient = { whatsapp, marca };
         <!-- ETAPA 3 · PIX -->
         <div class="tela" data-tela="pix">
           <div class="box-modalidade">
-            <h3>💠 Contribua por PIX</h3>
+            <h3>Contribua por PIX</h3>
             <p class="ajuda">Use a chave abaixo (ou o QR Code) e, se puder, envie o comprovante para agilizarmos a confirmação.</p>
             <div class="pix-chave-wrap" id="pix-chave-wrap">
               <code id="pix-chave"></code>
@@ -360,7 +354,7 @@ const configClient = { whatsapp, marca };
             <div class="comprovante">
               <label for="f-comprovante">Enviar comprovante (opcional)</label>
               <input type="file" id="f-comprovante" accept="image/png,image/jpeg,image/webp,application/pdf" />
-              <button type="button" class="btn btn-whatsapp btn-pequeno" id="btn-enviar-comprovante">📎 Enviar comprovante</button>
+              <button type="button" class="btn btn-whatsapp btn-pequeno" id="btn-enviar-comprovante">Enviar comprovante</button>
               <span class="comprovante-status" id="comprovante-status"></span>
             </div>
           </div>
@@ -371,19 +365,19 @@ const configClient = { whatsapp, marca };
         <!-- ETAPA 4 · COMPRA ONLINE -->
         <div class="tela" data-tela="compra">
           <div class="box-modalidade">
-            <h3>🛒 Compre o presente online</h3>
+            <h3>Compre o presente online</h3>
             <p class="ajuda">Escolha um dos links abaixo. A loja abre em outra janela. Depois, registre seu compromisso.</p>
             <div class="compra-links" id="compra-links"></div>
             <p class="compra-sem" id="compra-sem" style="display:none">Ainda não há links cadastrados para esta cartinha — você pode combinar a compra pelo WhatsApp.</p>
           </div>
-          <button type="button" class="btn btn-primario" id="btn-compra-registrar">✅ Registrar meu compromisso</button>
+          <button type="button" class="btn btn-primario" id="btn-compra-registrar">Registrar meu compromisso</button>
           <button type="button" class="btn btn-fantasma" data-voltar="cadastro">Voltar</button>
         </div>
 
         <!-- ETAPA 5 · ENTREGA PRESENCIAL -->
         <div class="tela" data-tela="presencial">
           <div class="box-modalidade">
-            <h3>📦 Entrega presencial</h3>
+            <h3>Entrega presencial</h3>
             <p class="ajuda" id="presencial-orientacoes"></p>
             <div class="endereco-box" id="presencial-endereco"></div>
             <div class="campo">
@@ -391,13 +385,12 @@ const configClient = { whatsapp, marca };
               <input type="text" id="f-previsao" maxlength="40" placeholder="Ex.: até 20/12 ou neste sábado" />
             </div>
           </div>
-          <button type="button" class="btn btn-primario" id="btn-presencial-registrar">✅ Registrar previsão de entrega</button>
+          <button type="button" class="btn btn-primario" id="btn-presencial-registrar">Registrar previsão de entrega</button>
           <button type="button" class="btn btn-fantasma" data-voltar="cadastro">Voltar</button>
         </div>
 
         <!-- ETAPA 6 · SUCESSO -->
         <div class="tela tela-sucesso" data-tela="sucesso">
-          <div class="sucesso-selo">🎉</div>
           <h3>Reserva confirmada!</h3>
           <p class="sucesso-sub" id="suc-sub"></p>
           <div class="sucesso-info">
@@ -405,7 +398,7 @@ const configClient = { whatsapp, marca };
             <div><span class="lab">Modalidade</span><b id="suc-modalidade"></b></div>
           </div>
           <div class="sucesso-orient" id="suc-orientacoes"></div>
-          <button type="button" class="btn btn-whatsapp" id="btn-whatsapp-share">📲 Compartilhar no WhatsApp</button>
+          <button type="button" class="btn btn-whatsapp" id="btn-whatsapp-share">Compartilhar no WhatsApp</button>
           <button type="button" class="btn btn-fantasma" id="btn-fechar-sucesso">Fechar</button>
         </div>
       </div>

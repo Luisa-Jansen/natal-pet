@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
   const animal = await obterAnimal(db, animalId);
   if (!animal || !animal.ativo) return json({ erro: 'Cartinha não encontrada.' }, 404);
   if (animal.status !== 'disponivel') {
-    return json({ erro: 'Esta cartinha já foi reservada. Que tal escolher outra? 💚' }, 409);
+    return json({ erro: 'Esta cartinha já foi reservada. Que tal escolher outra?' }, 409);
   }
 
   // código da campanha
@@ -77,7 +77,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (e) {
     const msg = String((e as Error).message || '');
     if (msg.includes('UNIQUE') || msg.includes('constraint')) {
-      return json({ erro: 'Alguém reservou essa cartinha agora há pouco. Escolha outra 💚' }, 409);
+      return json({ erro: 'Alguém reservou essa cartinha agora há pouco. Escolha outra.' }, 409);
     }
     return json({ erro: 'Não foi possível registrar a reserva. Tente novamente.' }, 500);
   }

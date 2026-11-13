@@ -2,11 +2,11 @@
 // para alimentar os filtros da galeria. Baseado em palavras-chave.
 
 export const CATEGORIAS = {
-  cama: { label: 'Casinha & Cama', emoji: '🏠' },
-  conforto: { label: 'Cobertor & Conforto', emoji: '🧸' },
-  brinquedo: { label: 'Brinquedo', emoji: '🎾' },
-  petisco: { label: 'Petisco & Comida', emoji: '🦴' },
-  outros: { label: 'Outros mimos', emoji: '🎁' },
+  cama: { label: 'Casinha & Cama' },
+  conforto: { label: 'Cobertor & Conforto' },
+  brinquedo: { label: 'Brinquedo' },
+  petisco: { label: 'Petisco & Comida' },
+  outros: { label: 'Outros mimos' },
 };
 
 const REGRAS = [

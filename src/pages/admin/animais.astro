@@ -7,7 +7,7 @@ import { CATEGORIAS } from '../../lib/categorias.js';
 
 const db = (env as any).DB;
 const animais = await listarAnimais(db, { apenasAtivos: false });
-const categorias = Object.entries(CATEGORIAS).map(([k, c]) => ({ k, label: `${c.emoji} ${c.label}` }));
+const categorias = Object.entries(CATEGORIAS).map(([k, c]) => ({ k, label: c.label }));
 const dadosClient = animais.map((a) => ({
   id: a.id,
   nome: a.nome,
@@ -32,9 +32,9 @@ const dadosClient = animais.map((a) => ({
         <div>
           <label for="a-especie">Espécie</label>
           <select id="a-especie">
-            <option value="indefinido">Pet 🐾</option>
-            <option value="cachorro">Cachorro 🐶</option>
-            <option value="gato">Gato 🐱</option>
+            <option value="indefinido">Pet</option>
+            <option value="cachorro">Cachorro</option>
+            <option value="gato">Gato</option>
           </select>
         </div>
       </div>

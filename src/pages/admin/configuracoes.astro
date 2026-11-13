@@ -76,7 +76,7 @@ try { telefones = JSON.parse(cfg.telefones || '[]'); } catch {}
         const d = await res.json();
         if (!res.ok) throw new Error(d.erro);
         $('c-qr').value = d.url; $('c-qr-preview').src = d.url;
-        msg($('msg-config'), 'QR enviado! ✅');
+        msg($('msg-config'), 'QR enviado!');
       } catch (e) { msg($('msg-config'), e.message || 'Falha', true); }
     });
 
@@ -96,7 +96,7 @@ try { telefones = JSON.parse(cfg.telefones || '[]'); } catch {}
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
         });
         if (!res.ok) throw new Error((await res.json()).erro);
-        msg($('msg-config'), 'Configurações salvas! ✅');
+        msg($('msg-config'), 'Configurações salvas!');
       } catch (e) { msg($('msg-config'), e.message || 'Falha', true); }
     });
 
@@ -109,7 +109,7 @@ try { telefones = JSON.parse(cfg.telefones || '[]'); } catch {}
           body: JSON.stringify({ atual: $('s-atual').value, nova: $('s-nova').value }),
         });
         if (!res.ok) throw new Error((await res.json()).erro);
-        msg($('msg-senha'), 'Senha alterada! ✅');
+        msg($('msg-senha'), 'Senha alterada!');
         $('form-senha').reset();
       } catch (e) { msg($('msg-senha'), e.message || 'Falha', true); }
     });

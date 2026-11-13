@@ -21,7 +21,7 @@ const tituloFinal = titulo ? `${titulo} — ${SITE.nome}` : `${SITE.nome} | ${SI
     <meta property="og:description" content={descricao} />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#0f5132" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><g fill='%231f5a3d'><ellipse cx='16' cy='21' rx='7' ry='5.5'/><circle cx='8.5' cy='13' r='3'/><circle cx='23.5' cy='13' r='3'/><circle cx='13' cy='8' r='2.6'/><circle cx='19' cy='8' r='2.6'/></g></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -38,18 +38,18 @@ const tituloFinal = titulo ? `${titulo} — ${SITE.nome}` : `${SITE.nome} | ${SI
       const prefereReduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const alvo = document.getElementById('neve');
       if (alvo && !prefereReduzir) {
-        // Neve discreta: poucos flocos, pequenos e translúcidos (toque sutil, sem distrair)
-        const flocos = ['❄', '❅'];
+        // Neve discreta: pequenos pontos brancos (sem emojis), translúcidos
         const qtd = window.innerWidth < 600 ? 7 : 12;
         for (let i = 0; i < qtd; i++) {
           const f = document.createElement('span');
           f.className = 'floco';
-          f.textContent = flocos[i % flocos.length];
+          const d = 3 + Math.random() * 4;
           f.style.left = Math.random() * 100 + 'vw';
-          f.style.fontSize = 5 + Math.random() * 8 + 'px';
+          f.style.width = d + 'px';
+          f.style.height = d + 'px';
           f.style.animationDuration = 11 + Math.random() * 10 + 's';
           f.style.animationDelay = Math.random() * 10 + 's';
-          f.style.opacity = String(0.18 + Math.random() * 0.22);
+          f.style.opacity = String(0.16 + Math.random() * 0.2);
           alvo.appendChild(f);
         }
       }

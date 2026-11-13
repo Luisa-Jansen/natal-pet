@@ -36,10 +36,10 @@ const { results: reservas = [] } = await db
               <tr data-codigo={r.codigo}>
                 <td><b>{r.codigo}</b><br /><small style="color:#889">{r.criado_em?.slice(0, 16)}</small></td>
                 <td>{r.animal}</td>
-                <td>{r.padrinho || '—'}{r.previsao_entrega ? <br /> : null}{r.previsao_entrega ? <small style="color:#889">📅 {r.previsao_entrega}</small> : null}</td>
+                <td>{r.padrinho || '—'}{r.previsao_entrega ? <br /> : null}{r.previsao_entrega ? <small style="color:#889">Entrega: {r.previsao_entrega}</small> : null}</td>
                 <td style="font-size:.82rem">
-                  {r.whatsapp ? <div>📱 {r.whatsapp}</div> : null}
-                  {r.email ? <div>✉️ {r.email}</div> : null}
+                  {r.whatsapp ? <div>{r.whatsapp}</div> : null}
+                  {r.email ? <div>{r.email}</div> : null}
                   {!r.whatsapp && !r.email ? '—' : null}
                 </td>
                 <td>{MODALIDADE_LABEL[r.modalidade] || r.modalidade || '—'}</td>
@@ -48,13 +48,13 @@ const { results: reservas = [] } = await db
                 <td>
                   <div class="acoes-linha">
                     {r.status !== 'cancelada' && r.status !== 'presente_recebido' && r.status !== 'concluida' ? (
-                      <button class="btn-mini" data-acao="recebido">✅ Recebido</button>
+                      <button class="btn-mini" data-acao="recebido">Recebido</button>
                     ) : null}
                     {r.status === 'presente_recebido' ? (
-                      <button class="btn-mini" data-acao="concluir">🏁 Concluir</button>
+                      <button class="btn-mini" data-acao="concluir">Concluir</button>
                     ) : null}
                     {r.status !== 'cancelada' && r.status !== 'concluida' ? (
-                      <button class="btn-mini perigo" data-acao="liberar">↩ Liberar</button>
+                      <button class="btn-mini perigo" data-acao="liberar">Liberar</button>
                     ) : null}
                   </div>
                 </td>
