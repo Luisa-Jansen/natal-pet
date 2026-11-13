@@ -1,0 +1,839 @@
+{
+  "total": 83,
+  "numeros_whatsapp": [
+    "556283434199",
+    "556295708383"
+  ],
+  "pets": [
+    {
+      "id": "afonso",
+      "nome": "Afonso",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Afonso. Vim para o abrigo depois que minha tutora faleceu. Sou quietinho e bonzinho.",
+      "pedido": "uma casinha nova, porque a minha está muito desgastada",
+      "cartinha": "Oi, eu sou o Afonso. Vim para o abrigo depois que minha tutora faleceu. Sou quietinho e bonzinho. Papai Noel, neste Natal eu queria muito ganhar uma casinha nova, porque a minha está muito desgastada.",
+      "foto": "/pets/afonso.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$vfpn57agg4"
+    },
+    {
+      "id": "afonso-2",
+      "nome": "Afonso",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Afonso. Cheguei ao abrigo este ano, depois de ser abandonado perto do aeroporto. Por sorte, encontrei pessoas que cuidaram de mim.",
+      "pedido": "um kit de brinquedos para dividir com meus amigos de baia",
+      "cartinha": "Oi, eu sou o Afonso. Cheguei ao abrigo este ano, depois de ser abandonado perto do aeroporto. Por sorte, encontrei pessoas que cuidaram de mim. Papai Noel, neste Natal eu queria muito ganhar um kit de brinquedos para dividir com meus amigos de baia.",
+      "foto": "/pets/afonso-2.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$rq5etzm2we"
+    },
+    {
+      "id": "aipim",
+      "nome": "Aipim",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Aipim. Apareci na porta do abrigo numa noite de chuva, em 2023, com a patinha machucada. Fui tratado e amado, mas nunca escolhido.",
+      "pedido": "uma caminha nova para colocar dentro do meu pneu",
+      "cartinha": "Oi, eu sou o Aipim. Apareci na porta do abrigo numa noite de chuva, em 2023, com a patinha machucada. Fui tratado e amado, mas nunca escolhido. Papai Noel, neste Natal eu queria muito ganhar uma caminha nova para colocar dentro do meu pneu.",
+      "foto": "/pets/aipim.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$fp6owfljspw"
+    },
+    {
+      "id": "alonso",
+      "nome": "Alonso",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Alonso. Fui encontrado comendo carcaças na beira da BR e com parvovirose. Fiquei muito mal, mas sobrevivi.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou o Alonso. Fui encontrado comendo carcaças na beira da BR e com parvovirose. Fiquei muito mal, mas sobrevivi. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/alonso.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$dsk726vws7r"
+    },
+    {
+      "id": "anna",
+      "nome": "Anna",
+      "especie": "gato",
+      "historia": "Oi, eu sou a Anna. Cheguei ao abrigo bem pequenininha e hoje tenho uns 5 anos. Cresci no gatil e ainda sonho com uma família.",
+      "pedido": "uma casinha pequena com almofadinha para descansar quentinha",
+      "cartinha": "Oi, eu sou a Anna. Cheguei ao abrigo bem pequenininha e hoje tenho uns 5 anos. Cresci no gatil e ainda sonho com uma família. Papai Noel, neste Natal eu queria muito ganhar uma casinha pequena com almofadinha para descansar quentinha.",
+      "foto": "/pets/anna.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$p4c8n09abj"
+    },
+    {
+      "id": "apolo",
+      "nome": "Apolo",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Apolo. Estou no abrigo desde filhote, em 2020. Divido a baia com a Lasanha e nós amamos água: vivemos derrubando as bacias!",
+      "pedido": "um tapete chafariz de água para cães",
+      "cartinha": "Oi, eu sou o Apolo. Estou no abrigo desde filhote, em 2020. Divido a baia com a Lasanha e nós amamos água: vivemos derrubando as bacias! Papai Noel, neste Natal eu queria muito ganhar um tapete chafariz de água para cães.",
+      "foto": "/pets/apolo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$pck6ev903yd"
+    },
+    {
+      "id": "ariel",
+      "nome": "Ariel",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Ariel. Fui resgatada das ruas muito magrinha e debilitada. Hoje tenho comida, proteção e muito carinho no abrigo.",
+      "pedido": "um kit de sachês bem gostosos",
+      "cartinha": "Oi, eu sou a Ariel. Fui resgatada das ruas muito magrinha e debilitada. Hoje tenho comida, proteção e muito carinho no abrigo. Papai Noel, neste Natal eu queria muito ganhar um kit de sachês bem gostosos.",
+      "foto": "/pets/ariel.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$nyjcfnxpv0f"
+    },
+    {
+      "id": "bartira",
+      "nome": "Bartira",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Bartira. Vivia em uma construção e corria risco por lá. Ainda sou muito na minha, mas amo a minha casinha.",
+      "pedido": "uma almofadinha ou um cobertor bem quentinho",
+      "cartinha": "Oi, eu sou a Bartira. Vivia em uma construção e corria risco por lá. Ainda sou muito na minha, mas amo a minha casinha. Papai Noel, neste Natal eu queria muito ganhar uma almofadinha ou um cobertor bem quentinho.",
+      "foto": "/pets/bartira.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$fje312qa4lg"
+    },
+    {
+      "id": "bebel",
+      "nome": "Bebel",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Bebel. Tenho uns 5 anos e conheci de perto as dificuldades das ruas. Hoje estou protegida no abrigo.",
+      "pedido": "uma casinha pequena e confortável para dormir em paz",
+      "cartinha": "Oi, eu sou a Bebel. Tenho uns 5 anos e conheci de perto as dificuldades das ruas. Hoje estou protegida no abrigo. Papai Noel, neste Natal eu queria muito ganhar uma casinha pequena e confortável para dormir em paz.",
+      "foto": "/pets/bebel.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$ocnxzp5jk9a"
+    },
+    {
+      "id": "becky",
+      "nome": "Becky",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Becky. Fui encontrada no sol com meus irmãos, todos passando mal. Hoje amo brincar.",
+      "pedido": "um brinquedinho",
+      "cartinha": "Oi, eu sou a Becky. Fui encontrada no sol com meus irmãos, todos passando mal. Hoje amo brincar. Papai Noel, neste Natal eu queria muito ganhar um brinquedinho.",
+      "foto": "/pets/becky.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794259881/$s3w5qhhkmqs"
+    },
+    {
+      "id": "belinda",
+      "nome": "Belinda",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Belinda, uma das moradoras mais antigas daqui. Cheguei grávida de 7 bebês. Todos foram adotados, menos eu.",
+      "pedido": "uma caminha suspensa ou de pneu, para não sujar de terra",
+      "cartinha": "Oi, eu sou a Belinda, uma das moradoras mais antigas daqui. Cheguei grávida de 7 bebês. Todos foram adotados, menos eu. Papai Noel, neste Natal eu queria muito ganhar uma caminha suspensa ou de pneu, para não sujar de terra.",
+      "foto": "/pets/belinda.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$x4f0q0s1b9c"
+    },
+    {
+      "id": "bertha",
+      "nome": "Bertha",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Bertha. Passei muito tempo amarrada embaixo de uma árvore, sem proteção. Amo carinho e atenção.",
+      "pedido": "algumas guloseimas bem gostosas",
+      "cartinha": "Oi, eu sou a Bertha. Passei muito tempo amarrada embaixo de uma árvore, sem proteção. Amo carinho e atenção. Papai Noel, neste Natal eu queria muito ganhar algumas guloseimas bem gostosas.",
+      "foto": "/pets/bertha.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$h48tuqwe75j"
+    },
+    {
+      "id": "bidu",
+      "nome": "Bidu",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Bidu. Fui atacado por outro cachorro e precisei de uma cirurgia na mandíbula. Me recuperei, mas agora estou tratando um tumor (TVT). Sigo firme!",
+      "pedido": "um ursinho de pelúcia bem fofinho para me fazer companhia",
+      "cartinha": "Oi, eu sou o Bidu. Fui atacado por outro cachorro e precisei de uma cirurgia na mandíbula. Me recuperei, mas agora estou tratando um tumor (TVT). Sigo firme! Papai Noel, neste Natal eu queria muito ganhar um ursinho de pelúcia bem fofinho para me fazer companhia.",
+      "foto": "/pets/bidu.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$ixmsb2uarq"
+    },
+    {
+      "id": "bob",
+      "nome": "Bob",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Bob. Nasci em um buraco em 2021 e fui adotado ainda filhote, mas meu dono se mudou e me deixou para trás. Assim, voltei para o abrigo.",
+      "pedido": "uma mantinha quentinha e macia para os dias frios",
+      "cartinha": "Oi, eu sou o Bob. Nasci em um buraco em 2021 e fui adotado ainda filhote, mas meu dono se mudou e me deixou para trás. Assim, voltei para o abrigo. Papai Noel, neste Natal eu queria muito ganhar uma mantinha quentinha e macia para os dias frios.",
+      "foto": "/pets/bob.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$1une8b9k98z"
+    },
+    {
+      "id": "branca",
+      "nome": "Branca",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Branca, uma pitbull idosinha. Estou no abrigo há quase 9 anos. Fui explorada pelos meus antigos donos e, até hoje, sou medrosa e demoro a confiar.",
+      "pedido": "uma caminha grande e aconchegante para aproveitar minha velhice em paz",
+      "cartinha": "Oi, eu sou a Branca, uma pitbull idosinha. Estou no abrigo há quase 9 anos. Fui explorada pelos meus antigos donos e, até hoje, sou medrosa e demoro a confiar. Papai Noel, neste Natal eu queria muito ganhar uma caminha grande e aconchegante para aproveitar minha velhice em paz.",
+      "foto": "/pets/branca.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$u6ka50juyl"
+    },
+    {
+      "id": "bruce",
+      "nome": "Bruce",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Bruce. Cheguei ao abrigo filhote, em 2020, e há 6 anos espero por uma família. Mesmo assim, nunca perdi minha alegria.",
+      "pedido": "um kit de petiscos variados para dividir com meus amiguinhos",
+      "cartinha": "Oi, eu sou o Bruce. Cheguei ao abrigo filhote, em 2020, e há 6 anos espero por uma família. Mesmo assim, nunca perdi minha alegria. Papai Noel, neste Natal eu queria muito ganhar um kit de petiscos variados para dividir com meus amiguinhos.",
+      "foto": "/pets/bruce.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$92cqiggsps6"
+    },
+    {
+      "id": "cafe",
+      "nome": "Café",
+      "especie": "gato",
+      "historia": "Oi, eu sou o Café. Tenho uns 5 anos e quase morri nas ruas depois de ser envenenado com chumbinho. Fui socorrido a tempo e ganhei uma segunda chance.",
+      "pedido": "um kit de tapetes EVA coloridos para o nosso gatil",
+      "cartinha": "Oi, eu sou o Café. Tenho uns 5 anos e quase morri nas ruas depois de ser envenenado com chumbinho. Fui socorrido a tempo e ganhei uma segunda chance. Papai Noel, neste Natal eu queria muito ganhar um kit de tapetes EVA coloridos para o nosso gatil.",
+      "foto": "/pets/cafe.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$rxtl771xob"
+    },
+    {
+      "id": "cafu",
+      "nome": "Cafu",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Cafu. Tenho apenas 4 meses e sou um bebezão cheio de energia e curiosidade.",
+      "pedido": "brinquedos para gastar minha energia enquanto espero pela minha família",
+      "cartinha": "Oi, eu sou o Cafu. Tenho apenas 4 meses e sou um bebezão cheio de energia e curiosidade. Papai Noel, neste Natal eu queria muito ganhar brinquedos para gastar minha energia enquanto espero pela minha família.",
+      "foto": "/pets/cafu.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$dnru2h6vy0g"
+    },
+    {
+      "id": "caramelo",
+      "nome": "Caramelo",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Caramelo. Tenho 4 anos e fui resgatado depois de um atropelamento. Hoje estou seguro e recebendo muito carinho.",
+      "pedido": "mantinhas quentinhas e macias para os dias frios",
+      "cartinha": "Oi, eu sou o Caramelo. Tenho 4 anos e fui resgatado depois de um atropelamento. Hoje estou seguro e recebendo muito carinho. Papai Noel, neste Natal eu queria muito ganhar mantinhas quentinhas e macias para os dias frios.",
+      "foto": "/pets/caramelo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$z9n16wpl6xg"
+    },
+    {
+      "id": "carcoso",
+      "nome": "Carcoso",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Carcoso. Cheguei filhote, em 2022. Tive cinomose e parvovirose, mas sobrevivi sem sequelas.",
+      "pedido": "um bichinho de pelúcia",
+      "cartinha": "Oi, eu sou o Carcoso. Cheguei filhote, em 2022. Tive cinomose e parvovirose, mas sobrevivi sem sequelas. Papai Noel, neste Natal eu queria muito ganhar um bichinho de pelúcia.",
+      "foto": "/pets/carcoso.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$hnv21q6aboi"
+    },
+    {
+      "id": "costela",
+      "nome": "Costela",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Costela. Sobrevivi ao abandono, à cinomose e à doença do carrapato. Amo brincar e morder chinelos.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou a Costela. Sobrevivi ao abandono, à cinomose e à doença do carrapato. Amo brincar e morder chinelos. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/costela.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$b6fgy7p3s6v"
+    },
+    {
+      "id": "cristal",
+      "nome": "Cristal",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Cristal. Estou no abrigo desde 2019. Fui atropelada enquanto cuidava dos meus filhotes e, com muito tratamento, voltei a andar. Fiquei com sequelas e tomo medicação controlada.",
+      "pedido": "uma caminha grande, macia e confortável",
+      "cartinha": "Oi, eu sou a Cristal. Estou no abrigo desde 2019. Fui atropelada enquanto cuidava dos meus filhotes e, com muito tratamento, voltei a andar. Fiquei com sequelas e tomo medicação controlada. Papai Noel, neste Natal eu queria muito ganhar uma caminha grande, macia e confortável.",
+      "foto": "/pets/cristal.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$rp15lr60gan"
+    },
+    {
+      "id": "dandara",
+      "nome": "Dandara",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Dandara. Cheguei ao abrigo em 2019 com uma patinha cheia de feridas e larvas. Me recuperei e hoje sou uma das senhorinhas da turma.",
+      "pedido": "um tapete de farejar e alguns petiscos gostosos",
+      "cartinha": "Oi, eu sou a Dandara. Cheguei ao abrigo em 2019 com uma patinha cheia de feridas e larvas. Me recuperei e hoje sou uma das senhorinhas da turma. Papai Noel, neste Natal eu queria muito ganhar um tapete de farejar e alguns petiscos gostosos.",
+      "foto": "/pets/dandara.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$i25pltuvc7p"
+    },
+    {
+      "id": "darlene",
+      "nome": "Darlene",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Darlene. Fui resgatada das ruas e ainda tenho muito medo. Às vezes tomo chuva porque não me sinto segura nas partes cobertas.",
+      "pedido": "uma casinha para ficar protegida",
+      "cartinha": "Oi, eu sou a Darlene. Fui resgatada das ruas e ainda tenho muito medo. Às vezes tomo chuva porque não me sinto segura nas partes cobertas. Papai Noel, neste Natal eu queria muito ganhar uma casinha para ficar protegida.",
+      "foto": "/pets/darlene.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$c4ed6lbashs"
+    },
+    {
+      "id": "dominic",
+      "nome": "Dominic",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Dominic. Vivia nas ruas, me escondendo do sol embaixo de um móvel velho. Fui o primeiro morador da chácara do projeto.",
+      "pedido": "uma caminha bem quentinha",
+      "cartinha": "Oi, eu sou o Dominic. Vivia nas ruas, me escondendo do sol embaixo de um móvel velho. Fui o primeiro morador da chácara do projeto. Papai Noel, neste Natal eu queria muito ganhar uma caminha bem quentinha.",
+      "foto": "/pets/dominic.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$usjl1z1d24"
+    },
+    {
+      "id": "donzelo",
+      "nome": "Donzelo",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Donzelo. Nasci em uma praça movimentada e estou aqui há 2 anos. Sou muito brincalhão.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou o Donzelo. Nasci em uma praça movimentada e estou aqui há 2 anos. Sou muito brincalhão. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/donzelo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$w42jcekm3ug"
+    },
+    {
+      "id": "duque",
+      "nome": "Duque",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Duque. Fui abandonado perto do aeroporto e estou no abrigo há mais de 1 ano. Tratei um tumor (TVT) e hoje estou 100% recuperado!",
+      "pedido": "uma piscininha infantil para me refrescar nos dias quentes",
+      "cartinha": "Oi, eu sou o Duque. Fui abandonado perto do aeroporto e estou no abrigo há mais de 1 ano. Tratei um tumor (TVT) e hoje estou 100% recuperado! Papai Noel, neste Natal eu queria muito ganhar uma piscininha infantil para me refrescar nos dias quentes.",
+      "foto": "/pets/duque.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$8unu2zjwko8"
+    },
+    {
+      "id": "eric",
+      "nome": "Eric",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Eric. Nasci em um terminal de ônibus. Fui adotado, mas vivia amarrado, então a tia do abrigo foi me buscar. Sou brincalhão e feliz.",
+      "pedido": "uma orelha defumada ou um osso",
+      "cartinha": "Oi, eu sou o Eric. Nasci em um terminal de ônibus. Fui adotado, mas vivia amarrado, então a tia do abrigo foi me buscar. Sou brincalhão e feliz. Papai Noel, neste Natal eu queria muito ganhar uma orelha defumada ou um osso.",
+      "foto": "/pets/eric.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$7vsf0yiky3v"
+    },
+    {
+      "id": "fafa",
+      "nome": "Fafá",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Fafá. Nasci aqui no abrigo e sou muito apegado à minha mãe. Sou brincalhão e amoroso.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou o Fafá. Nasci aqui no abrigo e sou muito apegado à minha mãe. Sou brincalhão e amoroso. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/fafa.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$op83vx3uf6r"
+    },
+    {
+      "id": "fatima",
+      "nome": "Fátima",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Fátima. Cheguei grávida de 7 bebês. Meu filho que ficou aqui entra em pânico sem mim, e ninguém quis nos adotar juntos.",
+      "pedido": "uma caminha bem quentinha para dormirmos juntos",
+      "cartinha": "Oi, eu sou a Fátima. Cheguei grávida de 7 bebês. Meu filho que ficou aqui entra em pânico sem mim, e ninguém quis nos adotar juntos. Papai Noel, neste Natal nós queríamos muito ganhar uma caminha bem quentinha para dormirmos juntos.",
+      "foto": "/pets/fatima.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$simls3uliy9"
+    },
+    {
+      "id": "fiona",
+      "nome": "Fiona",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Fiona. Estou no abrigo desde filhote, em 2021. Já vi muitos amiguinhos serem adotados, mas a minha vez ainda não chegou.",
+      "pedido": "uma mantinha quentinha e macia para os dias frios",
+      "cartinha": "Oi, eu sou a Fiona. Estou no abrigo desde filhote, em 2021. Já vi muitos amiguinhos serem adotados, mas a minha vez ainda não chegou. Papai Noel, neste Natal eu queria muito ganhar uma mantinha quentinha e macia para os dias frios.",
+      "foto": "/pets/fiona.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$q1yrs55rps"
+    },
+    {
+      "id": "fred",
+      "nome": "Fred",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Fred. Cheguei ao abrigo filhote e hoje tenho uns 5 anos. Até agora, ninguém me escolheu.",
+      "pedido": "uma casinha pequena e aconchegante para me esconder e tirar sonecas",
+      "cartinha": "Oi, eu sou o Fred. Cheguei ao abrigo filhote e hoje tenho uns 5 anos. Até agora, ninguém me escolheu. Papai Noel, neste Natal eu queria muito ganhar uma casinha pequena e aconchegante para me esconder e tirar sonecas.",
+      "foto": "/pets/fred.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794262652/$i2ddetguk88"
+    },
+    {
+      "id": "garfield",
+      "nome": "Garfield",
+      "especie": "gato",
+      "historia": "Oi, eu sou o Garfield. Tenho uns 6 anos e fui resgatado de um lugar onde envenenavam gatos. Hoje estou protegido, mas sonho com um lar sem medo.",
+      "pedido": "um arranhador resistente para afiar as unhas e me divertir",
+      "cartinha": "Oi, eu sou o Garfield. Tenho uns 6 anos e fui resgatado de um lugar onde envenenavam gatos. Hoje estou protegido, mas sonho com um lar sem medo. Papai Noel, neste Natal eu queria muito ganhar um arranhador resistente para afiar as unhas e me divertir.",
+      "foto": "/pets/garfield.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$q7g9ku5hng"
+    },
+    {
+      "id": "glorinha",
+      "nome": "Glorinha",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Glorinha. Cheguei ao abrigo em 2022 com cinomose. Venci a doença e, mesmo com algumas sequelas, hoje vivo bem.",
+      "pedido": "uma caminha grande, macia e confortável para minhas sonecas",
+      "cartinha": "Oi, eu sou a Glorinha. Cheguei ao abrigo em 2022 com cinomose. Venci a doença e, mesmo com algumas sequelas, hoje vivo bem. Papai Noel, neste Natal eu queria muito ganhar uma caminha grande, macia e confortável para minhas sonecas.",
+      "foto": "/pets/glorinha.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$4x5jshrgpxx"
+    },
+    {
+      "id": "gohan",
+      "nome": "Gohan",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Gohan. Vivia perto de um condomínio, até que começaram a implicar comigo, mesmo eu não sendo uma ameaça.",
+      "pedido": "um ossinho ou uma orelha defumada",
+      "cartinha": "Oi, eu sou o Gohan. Vivia perto de um condomínio, até que começaram a implicar comigo, mesmo eu não sendo uma ameaça. Papai Noel, neste Natal eu queria muito ganhar um ossinho ou uma orelha defumada.",
+      "foto": "/pets/gohan.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$pms104iocim"
+    },
+    {
+      "id": "goji-berry",
+      "nome": "Goji Berry",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Goji Berry. Nasci no mato e fui resgatado com minha mãe e meus irmãos. Tenho 1 ano e meio e sou muito brincalhão.",
+      "pedido": "uma piscina de bolinhas infantil",
+      "cartinha": "Oi, eu sou o Goji Berry. Nasci no mato e fui resgatado com minha mãe e meus irmãos. Tenho 1 ano e meio e sou muito brincalhão. Papai Noel, neste Natal eu queria muito ganhar uma piscina de bolinhas infantil.",
+      "foto": "/pets/goji-berry.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$6hb2iak4f2o"
+    },
+    {
+      "id": "gueto",
+      "nome": "Gueto",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Gueto. Ainda bebê, fui abandonado em uma fábrica com vários outros cães. Já estou há 2 anos aqui.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou o Gueto. Ainda bebê, fui abandonado em uma fábrica com vários outros cães. Já estou há 2 anos aqui. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/gueto.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$fiporlhaxkn"
+    },
+    {
+      "id": "hanna",
+      "nome": "Hanna",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Hanna. Tive 12 bebês em um túmulo de cemitério, depois de muitas outras ninhadas. Hoje estou livre desse sofrimento.",
+      "pedido": "uma caminha suspensa, porque na seca tudo fica sujo de terra",
+      "cartinha": "Oi, eu sou a Hanna. Tive 12 bebês em um túmulo de cemitério, depois de muitas outras ninhadas. Hoje estou livre desse sofrimento. Papai Noel, neste Natal eu queria muito ganhar uma caminha suspensa, porque na seca tudo fica sujo de terra.",
+      "foto": "/pets/hanna.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$1dyddf2p2e9"
+    },
+    {
+      "id": "hulk",
+      "nome": "Hulk",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Hulk. Estou no abrigo desde filhote, em 2021, e nunca perdi minha alegria e vontade de brincar.",
+      "pedido": "uma piscina de bolinhas coloridas para brincar com meus amigos",
+      "cartinha": "Oi, eu sou o Hulk. Estou no abrigo desde filhote, em 2021, e nunca perdi minha alegria e vontade de brincar. Papai Noel, neste Natal eu queria muito ganhar uma piscina de bolinhas coloridas para brincar com meus amigos.",
+      "foto": "/pets/hulk.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$5hs4qo224ed"
+    },
+    {
+      "id": "isa",
+      "nome": "Isa",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Isa. Cheguei ao abrigo há pouco tempo, depois de ser atropelada, e ainda estou me recuperando.",
+      "pedido": "um macaquinho de pelúcia para me fazer companhia na recuperação",
+      "cartinha": "Oi, eu sou a Isa. Cheguei ao abrigo há pouco tempo, depois de ser atropelada, e ainda estou me recuperando. Papai Noel, neste Natal eu queria muito ganhar um macaquinho de pelúcia para me fazer companhia na recuperação.",
+      "foto": "/pets/isa.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$ay01eaqd5wr"
+    },
+    {
+      "id": "jade",
+      "nome": "Jade",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Jade. Tenho 5 meses e fui resgatada com minha mãe e meus irmãos. Minha mãe não resistiu e meus irmãos já foram adotados, mas eu continuo aqui.",
+      "pedido": "um brinquedo interativo com bolinhas e petiscos para gastar minha energia de filhotona",
+      "cartinha": "Oi, eu sou a Jade. Tenho 5 meses e fui resgatada com minha mãe e meus irmãos. Minha mãe não resistiu e meus irmãos já foram adotados, mas eu continuo aqui. Papai Noel, neste Natal eu queria muito ganhar um brinquedo interativo com bolinhas e petiscos para gastar minha energia de filhotona.",
+      "foto": "/pets/jade.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$hqj1p1p8iqw"
+    },
+    {
+      "id": "joca",
+      "nome": "Joca",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Joca. Estou no abrigo desde 2019. Já sou um senhorzinho, mas continuo alegre e cheio de energia, esperando um lar para minha velhice.",
+      "pedido": "uma caminha confortável e petiscos bem gostosos",
+      "cartinha": "Oi, eu sou o Joca. Estou no abrigo desde 2019. Já sou um senhorzinho, mas continuo alegre e cheio de energia, esperando um lar para minha velhice. Papai Noel, neste Natal eu queria muito ganhar uma caminha confortável e petiscos bem gostosos.",
+      "foto": "/pets/joca.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$s0mtj3e0j8e"
+    },
+    {
+      "id": "jorge",
+      "nome": "Jorge",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Jorge. Nasci em um buraco em 2021 e precisei da ajuda dos bombeiros para ser resgatado. Meus irmãos foram adotados e só ficamos eu e meu maninho Bob.",
+      "pedido": "uma mantinha quentinha e macia para os dias frios",
+      "cartinha": "Oi, eu sou o Jorge. Nasci em um buraco em 2021 e precisei da ajuda dos bombeiros para ser resgatado. Meus irmãos foram adotados e só ficamos eu e meu maninho Bob. Papai Noel, neste Natal eu queria muito ganhar uma mantinha quentinha e macia para os dias frios.",
+      "foto": "/pets/jorge.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$eigxaoyp2al"
+    },
+    {
+      "id": "juju",
+      "nome": "Juju",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Juju. Estou no abrigo há mais de 5 anos. Fui resgatada com meus filhotes de um buraco, com ajuda dos bombeiros. Dois deles ainda estão aqui comigo.",
+      "pedido": "um ossão gigante para roer",
+      "cartinha": "Oi, eu sou a Juju. Estou no abrigo há mais de 5 anos. Fui resgatada com meus filhotes de um buraco, com ajuda dos bombeiros. Dois deles ainda estão aqui comigo. Papai Noel, neste Natal eu queria muito ganhar um ossão gigante para roer.",
+      "foto": "/pets/juju.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$wquq3os49kp"
+    },
+    {
+      "id": "juma",
+      "nome": "Juma",
+      "especie": "gato",
+      "historia": "Oi, eu sou a Juma. Cheguei ao abrigo filhote e hoje tenho uns 6 anos. Sou mais arisca e acabei crescendo aqui.",
+      "pedido": "um kit de tapetes EVA para deixar nosso gatil mais confortável",
+      "cartinha": "Oi, eu sou a Juma. Cheguei ao abrigo filhote e hoje tenho uns 6 anos. Sou mais arisca e acabei crescendo aqui. Papai Noel, neste Natal eu queria muito ganhar um kit de tapetes EVA para deixar nosso gatil mais confortável.",
+      "foto": "/pets/juma.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$wh2lzojp99a"
+    },
+    {
+      "id": "lasanha",
+      "nome": "Lasanha",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Lasanha. Estou no abrigo desde filhote, em 2020. Divido a baia com o Apolo e nós amamos água: vivemos derrubando as bacias!",
+      "pedido": "um tapete chafariz de água para cães",
+      "cartinha": "Oi, eu sou a Lasanha. Estou no abrigo desde filhote, em 2020. Divido a baia com o Apolo e nós amamos água: vivemos derrubando as bacias! Papai Noel, neste Natal eu queria muito ganhar um tapete chafariz de água para cães.",
+      "foto": "/pets/lasanha.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$wj5v2vch8u"
+    },
+    {
+      "id": "leticio",
+      "nome": "Leticio",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Leticio. Nasci aqui no abrigo, junto com outros 10 irmãos, e ainda não encontrei um lar.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou o Leticio. Nasci aqui no abrigo, junto com outros 10 irmãos, e ainda não encontrei um lar. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/leticio.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$97vh1e4fnb7"
+    },
+    {
+      "id": "lourdes",
+      "nome": "Lourdes",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Lourdes. Vivia nas ruas do interior e fui acolhida grávida. Meus 8 bebês foram adotados e eu estou aqui há 3 anos. Sou tímida e boazinha.",
+      "pedido": "petiscos",
+      "cartinha": "Oi, eu sou a Lourdes. Vivia nas ruas do interior e fui acolhida grávida. Meus 8 bebês foram adotados e eu estou aqui há 3 anos. Sou tímida e boazinha. Papai Noel, neste Natal eu queria muito ganhar petiscos.",
+      "foto": "/pets/lourdes.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$lu04ohbvamj"
+    },
+    {
+      "id": "lua",
+      "nome": "Lua",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Lua. Tenho uns 5 anos e fui resgatada das ruas com sarna. Com tratamento e carinho, me recuperei.",
+      "pedido": "uma casinha pequena e fofinha para tirar minhas sonecas",
+      "cartinha": "Oi, eu sou a Lua. Tenho uns 5 anos e fui resgatada das ruas com sarna. Com tratamento e carinho, me recuperei. Papai Noel, neste Natal eu queria muito ganhar uma casinha pequena e fofinha para tirar minhas sonecas.",
+      "foto": "/pets/lua.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$4z85xm8mafc"
+    },
+    {
+      "id": "luana",
+      "nome": "Luana",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Luana. Cheguei ao abrigo filhote, em 2021, e cresci aqui. Sigo esperando a minha vez de ter uma família.",
+      "pedido": "um mordedor resistente e divertido",
+      "cartinha": "Oi, eu sou a Luana. Cheguei ao abrigo filhote, em 2021, e cresci aqui. Sigo esperando a minha vez de ter uma família. Papai Noel, neste Natal eu queria muito ganhar um mordedor resistente e divertido.",
+      "foto": "/pets/luana.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$8ljq8bt9zyn"
+    },
+    {
+      "id": "malena",
+      "nome": "Malena",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Malena. Sou filhote e muito brincalhona. Fui encontrada seguindo pessoas perto de um supermercado, procurando alguém que me acolhesse.",
+      "pedido": "um brinquedinho",
+      "cartinha": "Oi, eu sou a Malena. Sou filhote e muito brincalhona. Fui encontrada seguindo pessoas perto de um supermercado, procurando alguém que me acolhesse. Papai Noel, neste Natal eu queria muito ganhar um brinquedinho.",
+      "foto": "/pets/malena.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$xzslrievwwa"
+    },
+    {
+      "id": "marcia-sensitiva",
+      "nome": "Márcia Sensitiva",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Márcia Sensitiva. Fui encontrada em uma praça, provavelmente recém-abandonada. Sou peralta e cheia de energia.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou a Márcia Sensitiva. Fui encontrada em uma praça, provavelmente recém-abandonada. Sou peralta e cheia de energia. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/marcia-sensitiva.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$krkb77nsrc"
+    },
+    {
+      "id": "margo",
+      "nome": "Margô",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Margô. Cheguei filhote, em 2021, com minha mãe e meus irmãos. Todos foram adotados, menos eu. Sou tímida e preciso de tempo para confiar.",
+      "pedido": "uma casinha com cobertinha macia para me sentir segura",
+      "cartinha": "Oi, eu sou a Margô. Cheguei filhote, em 2021, com minha mãe e meus irmãos. Todos foram adotados, menos eu. Sou tímida e preciso de tempo para confiar. Papai Noel, neste Natal eu queria muito ganhar uma casinha com cobertinha macia para me sentir segura.",
+      "foto": "/pets/margo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$us6t5gtucj8"
+    },
+    {
+      "id": "marrenta",
+      "nome": "Marrenta",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Marrenta. Nasci em uma obra e tive várias ninhadas seguidas, até adoecer com uma infecção no útero. Fui resgatada e, com tratamento, me recuperei.",
+      "pedido": "uma caminha macia e fofinha para minhas sonecas",
+      "cartinha": "Oi, eu sou a Marrenta. Nasci em uma obra e tive várias ninhadas seguidas, até adoecer com uma infecção no útero. Fui resgatada e, com tratamento, me recuperei. Papai Noel, neste Natal eu queria muito ganhar uma caminha macia e fofinha para minhas sonecas.",
+      "foto": "/pets/marrenta.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$zj6u5e7pha"
+    },
+    {
+      "id": "maya",
+      "nome": "Maya",
+      "especie": "gato",
+      "historia": "Oi, eu sou a Maya. Tenho uns 6 anos e fui resgatada de um lugar onde envenenavam gatos. Hoje estou segura no abrigo.",
+      "pedido": "um kit de tapetes EVA para deixar nosso gatil mais aconchegante",
+      "cartinha": "Oi, eu sou a Maya. Tenho uns 6 anos e fui resgatada de um lugar onde envenenavam gatos. Hoje estou segura no abrigo. Papai Noel, neste Natal eu queria muito ganhar um kit de tapetes EVA para deixar nosso gatil mais aconchegante.",
+      "foto": "/pets/maya.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$mkg6f8w7mw"
+    },
+    {
+      "id": "mila",
+      "nome": "Mila",
+      "especie": "gato",
+      "historia": "Oi, eu sou a Mila. Tenho uns 5 anos e fui resgatada das ruas. Hoje tenho proteção e carinho, mas ainda espero uma família.",
+      "pedido": "um arranhador com brinquedinhos pendurados",
+      "cartinha": "Oi, eu sou a Mila. Tenho uns 5 anos e fui resgatada das ruas. Hoje tenho proteção e carinho, mas ainda espero uma família. Papai Noel, neste Natal eu queria muito ganhar um arranhador com brinquedinhos pendurados.",
+      "foto": "/pets/mila.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$pen87g87v2"
+    },
+    {
+      "id": "miranda",
+      "nome": "Miranda",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Miranda. Cheguei muito brava, com meus filhotes, e hoje sou um doce. Adoro casinhas, mas estou gordinha e não caibo nas que temos.",
+      "pedido": "uma casinha grande e confortável",
+      "cartinha": "Oi, eu sou a Miranda. Cheguei muito brava, com meus filhotes, e hoje sou um doce. Adoro casinhas, mas estou gordinha e não caibo nas que temos. Papai Noel, neste Natal eu queria muito ganhar uma casinha grande e confortável.",
+      "foto": "/pets/miranda.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$zxyycq6ccma"
+    },
+    {
+      "id": "negao",
+      "nome": "Negão",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Negão. Estou no abrigo desde filhote, em 2020. Cresci e virei um grandalhão bem fofinho, ainda à espera de uma família.",
+      "pedido": "um mordedor grande e resistente, do meu tamanho",
+      "cartinha": "Oi, eu sou o Negão. Estou no abrigo desde filhote, em 2020. Cresci e virei um grandalhão bem fofinho, ainda à espera de uma família. Papai Noel, neste Natal eu queria muito ganhar um mordedor grande e resistente, do meu tamanho.",
+      "foto": "/pets/negao.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$cnxahg55zo8"
+    },
+    {
+      "id": "panda",
+      "nome": "Panda",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Panda. Meu tutor foi para uma UPA e nunca mais saiu de lá, e eu passei meses esperando por ele. Sou idoso, um pouco ranzinza e amo lugares fechadinhos.",
+      "pedido": "uma casinha",
+      "cartinha": "Oi, eu sou o Panda. Meu tutor foi para uma UPA e nunca mais saiu de lá, e eu passei meses esperando por ele. Sou idoso, um pouco ranzinza e amo lugares fechadinhos. Papai Noel, neste Natal eu queria muito ganhar uma casinha.",
+      "foto": "/pets/panda.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$cka6qy2omc"
+    },
+    {
+      "id": "pandy",
+      "nome": "Pandy",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Pandy. Estou no abrigo desde filhote, em 2021. Já vi muitos amiguinhos serem adotados, mas a minha vez ainda não chegou.",
+      "pedido": "um tapete de água com esguichos para me refrescar nos dias quentes",
+      "cartinha": "Oi, eu sou o Pandy. Estou no abrigo desde filhote, em 2021. Já vi muitos amiguinhos serem adotados, mas a minha vez ainda não chegou. Papai Noel, neste Natal eu queria muito ganhar um tapete de água com esguichos para me refrescar nos dias quentes.",
+      "foto": "/pets/pandy.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$trq8vdzv4c"
+    },
+    {
+      "id": "pingo-preto",
+      "nome": "Pingo Preto",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Pingo Preto. Cheguei ao abrigo pequenininho, em 2020, e nem sei como é ter uma casa só minha. Ainda sonho com um lar.",
+      "pedido": "um colchonete fresquinho para descansar nos dias quentes",
+      "cartinha": "Oi, eu sou o Pingo Preto. Cheguei ao abrigo pequenininho, em 2020, e nem sei como é ter uma casa só minha. Ainda sonho com um lar. Papai Noel, neste Natal eu queria muito ganhar um colchonete fresquinho para descansar nos dias quentes.",
+      "foto": "/pets/pingo-preto.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$hv2lauiiyfk"
+    },
+    {
+      "id": "poison",
+      "nome": "Poison",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Poison, um pastor-belga Malinois. Fui descartado e cheguei muito agressivo e desconfiado. Com paciência e adestramento, hoje sou um menino lindo e saudável.",
+      "pedido": "um mordedor de corda grande, para cães do meu tamanho",
+      "cartinha": "Oi, eu sou o Poison, um pastor-belga Malinois. Fui descartado e cheguei muito agressivo e desconfiado. Com paciência e adestramento, hoje sou um menino lindo e saudável. Papai Noel, neste Natal eu queria muito ganhar um mordedor de corda grande, para cães do meu tamanho.",
+      "foto": "/pets/poison.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794312689/$aahhwk27e38"
+    },
+    {
+      "id": "pretinho",
+      "nome": "Pretinho",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Pretinho. Estou no abrigo desde filhote, em 2021, e tenho energia de sobra: adoro correr, pular e brincar.",
+      "pedido": "um lançador de bolinhas e algumas bolinhas",
+      "cartinha": "Oi, eu sou o Pretinho. Estou no abrigo desde filhote, em 2021, e tenho energia de sobra: adoro correr, pular e brincar. Papai Noel, neste Natal eu queria muito ganhar um lançador de bolinhas e algumas bolinhas.",
+      "foto": "/pets/pretinho.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$bqc8588iv5a"
+    },
+    {
+      "id": "ravi",
+      "nome": "Ravi",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Ravi. Fui abandonado já idoso, com uma forte infecção de ouvido. Sou brincalhão e amo comer.",
+      "pedido": "uma cesta de frutas ou verduras",
+      "cartinha": "Oi, eu sou o Ravi. Fui abandonado já idoso, com uma forte infecção de ouvido. Sou brincalhão e amo comer. Papai Noel, neste Natal eu queria muito ganhar uma cesta de frutas ou verduras.",
+      "foto": "/pets/ravi.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$vc9xye9yvye"
+    },
+    {
+      "id": "riona",
+      "nome": "Riona",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Riona. Fui encontrada abandonada na chuva com meus irmãos, em 2020. Já são 6 anos esperando uma família.",
+      "pedido": "um macaquinho de pelúcia para me fazer companhia nas sonecas",
+      "cartinha": "Oi, eu sou a Riona. Fui encontrada abandonada na chuva com meus irmãos, em 2020. Já são 6 anos esperando uma família. Papai Noel, neste Natal eu queria muito ganhar um macaquinho de pelúcia para me fazer companhia nas sonecas.",
+      "foto": "/pets/riona.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$jdoerqljf8i"
+    },
+    {
+      "id": "rolex",
+      "nome": "Rolex",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Rolex. Fui adotado e depois solto na rua de novo. Sou reativo e demoro a confiar, mas em 3 anos aqui virei outro rapaz.",
+      "pedido": "uma orelha defumada ou um osso bem gostoso",
+      "cartinha": "Oi, eu sou o Rolex. Fui adotado e depois solto na rua de novo. Sou reativo e demoro a confiar, mas em 3 anos aqui virei outro rapaz. Papai Noel, neste Natal eu queria muito ganhar uma orelha defumada ou um osso bem gostoso.",
+      "foto": "/pets/rolex.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$9roxhesejes"
+    },
+    {
+      "id": "ronaldinho",
+      "nome": "Ronaldinho",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Ronaldinho. Tenho só 4 meses e sou um filhotinho cheio de energia e curiosidade.",
+      "pedido": "brinquedos mordedores para gastar minha energia",
+      "cartinha": "Oi, eu sou o Ronaldinho. Tenho só 4 meses e sou um filhotinho cheio de energia e curiosidade. Papai Noel, neste Natal eu queria muito ganhar brinquedos mordedores para gastar minha energia.",
+      "foto": "/pets/ronaldinho.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$wpx6f0wu8h8"
+    },
+    {
+      "id": "russo",
+      "nome": "Russo",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Russo. Cheguei ao abrigo filhote e virei um cachorrão com um coração cheio de amor. Ainda não encontrei uma família.",
+      "pedido": "um kit de bolinhas resistentes para correr atrás",
+      "cartinha": "Oi, eu sou o Russo. Cheguei ao abrigo filhote e virei um cachorrão com um coração cheio de amor. Ainda não encontrei uma família. Papai Noel, neste Natal eu queria muito ganhar um kit de bolinhas resistentes para correr atrás.",
+      "foto": "/pets/russo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$ul3pfxcjkcf"
+    },
+    {
+      "id": "sadia",
+      "nome": "Sadia",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Sadia. Fui abandonada quando meus donos se mudaram, e meus 2 filhotinhos não resistiram. Estou aqui há quase 1 ano e ainda sou medrosa.",
+      "pedido": "um osso defumado, minha coisa favorita",
+      "cartinha": "Oi, eu sou a Sadia. Fui abandonada quando meus donos se mudaram, e meus 2 filhotinhos não resistiram. Estou aqui há quase 1 ano e ainda sou medrosa. Papai Noel, neste Natal eu queria muito ganhar um osso defumado, minha coisa favorita.",
+      "foto": "/pets/sadia.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$lh02va6oqr"
+    },
+    {
+      "id": "scooby",
+      "nome": "Scooby",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Scooby. Estou no abrigo há 2 anos, desde que fui atropelado e não conseguia andar. Recebi cuidados e ganhei uma nova chance.",
+      "pedido": "um kit de petiscos variados",
+      "cartinha": "Oi, eu sou o Scooby. Estou no abrigo há 2 anos, desde que fui atropelado e não conseguia andar. Recebi cuidados e ganhei uma nova chance. Papai Noel, neste Natal eu queria muito ganhar um kit de petiscos variados.",
+      "foto": "/pets/scooby.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$3v70stb1z0l"
+    },
+    {
+      "id": "sidney",
+      "nome": "Sidney",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Sidney. Ainda sou tímido, mas estou me soltando aos poucos.",
+      "pedido": "patês ou petiscos",
+      "cartinha": "Oi, eu sou o Sidney. Ainda sou tímido, mas estou me soltando aos poucos. Papai Noel, neste Natal eu queria muito ganhar patês ou petiscos.",
+      "foto": "/pets/sidney.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$2jt79508g2p"
+    },
+    {
+      "id": "sortudo",
+      "nome": "Sortudo",
+      "especie": "gato",
+      "historia": "Oi, eu sou o Sortudo. Tenho uns 6 anos e fui encontrado nas ruas com uma sarna muito forte. Fui tratado e hoje estou saudável.",
+      "pedido": "um arranhador para alegrar ainda mais os meus dias",
+      "cartinha": "Oi, eu sou o Sortudo. Tenho uns 6 anos e fui encontrado nas ruas com uma sarna muito forte. Fui tratado e hoje estou saudável. Papai Noel, neste Natal eu queria muito ganhar um arranhador para alegrar ainda mais os meus dias.",
+      "foto": "/pets/sortudo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$po8zpttn8b"
+    },
+    {
+      "id": "tadeu",
+      "nome": "Tadeu",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Tadeu. Fui atropelado e cheguei com uma ferida feia na cabeça. Me recuperei e hoje sou um menino cheio de energia.",
+      "pedido": "um brinquedo recheável com petiscos para gastar energia",
+      "cartinha": "Oi, eu sou o Tadeu. Fui atropelado e cheguei com uma ferida feia na cabeça. Me recuperei e hoje sou um menino cheio de energia. Papai Noel, neste Natal eu queria muito ganhar um brinquedo recheável com petiscos para gastar energia.",
+      "foto": "/pets/tadeu.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$jgggfiq87r"
+    },
+    {
+      "id": "ted",
+      "nome": "Ted",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Ted, um Akita de 12 anos. Voltei para casa sem conseguir andar e meu tutor quis me sacrificar, mas o abrigo me deu uma nova chance. Hoje faço fisioterapia e estou voltando a andar.",
+      "pedido": "um kit de tapetes de EVA para não escorregar durante a recuperação",
+      "cartinha": "Oi, eu sou o Ted, um Akita de 12 anos. Voltei para casa sem conseguir andar e meu tutor quis me sacrificar, mas o abrigo me deu uma nova chance. Hoje faço fisioterapia e estou voltando a andar. Papai Noel, neste Natal eu queria muito ganhar um kit de tapetes de EVA para não escorregar durante a recuperação.",
+      "foto": "/pets/ted.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$if1c3p9sny"
+    },
+    {
+      "id": "tigrona",
+      "nome": "Tigrona",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou a Tigrona. Cheguei ao abrigo em 2020 com meus filhotes recém-nascidos. Sou grandona, brincalhona e carinhosa.",
+      "pedido": "um mordedor grande, para cães do meu tamanho",
+      "cartinha": "Oi, eu sou a Tigrona. Cheguei ao abrigo em 2020 com meus filhotes recém-nascidos. Sou grandona, brincalhona e carinhosa. Papai Noel, neste Natal eu queria muito ganhar um mordedor grande, para cães do meu tamanho.",
+      "foto": "/pets/tigrona.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$qf2stky9fbi"
+    },
+    {
+      "id": "tita",
+      "nome": "Tita",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Tita. Cheguei há pouco tempo. Gosto do meu cantinho, mas ainda tenho medo de tudo.",
+      "pedido": "uma caminha bem quentinha",
+      "cartinha": "Oi, eu sou a Tita. Cheguei há pouco tempo. Gosto do meu cantinho, mas ainda tenho medo de tudo. Papai Noel, neste Natal eu queria muito ganhar uma caminha bem quentinha.",
+      "foto": "/pets/tita.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794345248/$tyb2gd14ux"
+    },
+    {
+      "id": "toquinho",
+      "nome": "Toquinho",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Toquinho. Cheguei ao abrigo filhote, em 2020, com meus irmãos. Já são 6 anos esperando a minha vez.",
+      "pedido": "um mordedor de corda grande para brincar de cabo de guerra e perder uns quilinhos",
+      "cartinha": "Oi, eu sou o Toquinho. Cheguei ao abrigo filhote, em 2020, com meus irmãos. Já são 6 anos esperando a minha vez. Papai Noel, neste Natal eu queria muito ganhar um mordedor de corda grande para brincar de cabo de guerra e perder uns quilinhos.",
+      "foto": "/pets/toquinho.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$vk4kpux0exm"
+    },
+    {
+      "id": "valdo",
+      "nome": "Valdo",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Valdo. Nasci aqui em 2023. Minhas irmãs foram adotadas, mas eu nunca fui escolhido.",
+      "pedido": "um brinquedinho",
+      "cartinha": "Oi, eu sou o Valdo. Nasci aqui em 2023. Minhas irmãs foram adotadas, mas eu nunca fui escolhido. Papai Noel, neste Natal eu queria muito ganhar um brinquedinho.",
+      "foto": "/pets/valdo.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$fia6adiqwpg"
+    },
+    {
+      "id": "vegas",
+      "nome": "Vegas",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Vegas. Fui encontrado pedindo comida em um restaurante. Há 3 anos procuro um lar, mas é difícil um cão como eu ter uma chance.",
+      "pedido": "um brinquedo",
+      "cartinha": "Oi, eu sou o Vegas. Fui encontrado pedindo comida em um restaurante. Há 3 anos procuro um lar, mas é difícil um cão como eu ter uma chance. Papai Noel, neste Natal eu queria muito ganhar um brinquedo.",
+      "foto": "/pets/vegas.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$w46do3jq6g"
+    },
+    {
+      "id": "vitoria",
+      "nome": "Vitória",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou a Vitória. Fui encontrada em uma região rural, muito magrinha, e recebi os cuidados de que precisava.",
+      "pedido": "uma casinha tamanho médio para ter um cantinho só meu",
+      "cartinha": "Oi, eu sou a Vitória. Fui encontrada em uma região rural, muito magrinha, e recebi os cuidados de que precisava. Papai Noel, neste Natal eu queria muito ganhar uma casinha tamanho médio para ter um cantinho só meu.",
+      "foto": "/pets/vitoria.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$cqreziszgvd"
+    },
+    {
+      "id": "vladimir",
+      "nome": "Vladimir",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Vladimir. Cheguei há 2 anos, com 3 meses, depois que meus irmãos morreram em uma casa onde nem as pessoas tinham o que comer.",
+      "pedido": "um brinquedo bem legal",
+      "cartinha": "Oi, eu sou o Vladimir. Cheguei há 2 anos, com 3 meses, depois que meus irmãos morreram em uma casa onde nem as pessoas tinham o que comer. Papai Noel, neste Natal eu queria muito ganhar um brinquedo bem legal.",
+      "foto": "/pets/vladimir.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$fk71kczk41u"
+    },
+    {
+      "id": "vrinzim",
+      "nome": "Vrinzim",
+      "especie": "indefinido",
+      "historia": "Oi, eu sou o Vrinzim. Fui resgatado no mato com 2 dias de vida. Sou arredio e medroso, o que dificulta minha adoção, mas aqui sou alegre e brincalhão.",
+      "pedido": "petiscos",
+      "cartinha": "Oi, eu sou o Vrinzim. Fui resgatado no mato com 2 dias de vida. Sou arredio e medroso, o que dificulta minha adoção, mas aqui sou alegre e brincalhão. Papai Noel, neste Natal eu queria muito ganhar petiscos.",
+      "foto": "/pets/vrinzim.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$ibxyxfvjk4s"
+    },
+    {
+      "id": "zuko",
+      "nome": "Zuko",
+      "especie": "cachorro",
+      "historia": "Oi, eu sou o Zuko, mestiço de pitbull. Fui resgatado muito machucado depois de uma briga com outro animal. Hoje sou forte, cheio de energia e um pouquinho ansioso.",
+      "pedido": "um brinquedo recheável que libera petiscos aos poucos",
+      "cartinha": "Oi, eu sou o Zuko, mestiço de pitbull. Fui resgatado muito machucado depois de uma briga com outro animal. Hoje sou forte, cheio de energia e um pouquinho ansioso. Papai Noel, neste Natal eu queria muito ganhar um brinquedo recheável que libera petiscos aos poucos.",
+      "foto": "/pets/zuko.png",
+      "fotoRemota": "https://d335luupugsy2.cloudfront.net/cms/files/44193/1794400668/$5k8936u140b"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "natal-pet",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Adote uma Carta de Natal PET - campanha de cartinhas de Natal de pets de abrigo",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler dev",
+    "deploy": "astro build && wrangler deploy",
+    "astro": "astro",
+    "db:create": "wrangler d1 create natal_pet_db",
+    "db:local": "wrangler d1 execute natal_pet_db --local --file=./db/schema.sql",
+    "db:remote": "wrangler d1 execute natal_pet_db --remote --file=./db/schema.sql",
+    "db:adocoes": "wrangler d1 execute natal_pet_db --remote --command \"SELECT * FROM adocoes ORDER BY criado_em DESC;\""
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.4.7",
+    "astro": "^7.4.11"
+  },
+  "devDependencies": {
+    "wrangler": "^4.161.0"
+  }
+}

@@ -1,0 +1,11 @@
+name = "natal-pet"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Banco de dados D1 (guarda as adoções das cartinhas).
+# Para produção: rode `npx wrangler d1 create natal_pet_db` e cole o database_id abaixo.
+# Em desenvolvimento local o database_id pode ficar como está (usa um SQLite local).
+[[d1_databases]]
+binding = "DB"
+database_name = "natal_pet_db"
+database_id = "COLE-AQUI-O-ID-GERADO-PELO-WRANGLER"

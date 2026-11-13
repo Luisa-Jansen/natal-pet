@@ -1,0 +1,20 @@
+# build
+dist/
+.astro/
+
+# dependencias
+node_modules/
+
+# cloudflare / wrangler (estado local do D1)
+.wrangler/
+.dev.vars
+
+# logs e sistema
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/

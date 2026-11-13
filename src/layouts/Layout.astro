@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config.js';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+}
+const { titulo, descricao = SITE.descricao } = Astro.props;
+const tituloFinal = titulo ? `${titulo} — ${SITE.nome}` : `${SITE.nome} | ${SITE.marca}`;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{tituloFinal}</title>
+    <meta name="description" content={descricao} />
+    <meta property="og:title" content={tituloFinal} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0f5132" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Mountains+of+Christmas:wght@700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="neve" id="neve" aria-hidden="true"></div>
+    <slot />
+
+    <script>
+      // Neve leve e discreta (respeita prefers-reduced-motion)
+      const prefereReduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const alvo = document.getElementById('neve');
+      if (alvo && !prefereReduzir) {
+        const flocos = ['❄', '❅', '•'];
+        const qtd = window.innerWidth < 600 ? 14 : 28;
+        for (let i = 0; i < qtd; i++) {
+          const f = document.createElement('span');
+          f.className = 'floco';
+          f.textContent = flocos[i % flocos.length];
+          f.style.left = Math.random() * 100 + 'vw';
+          f.style.fontSize = 6 + Math.random() * 14 + 'px';
+          f.style.animationDuration = 6 + Math.random() * 9 + 's';
+          f.style.animationDelay = Math.random() * 8 + 's';
+          f.style.opacity = String(0.4 + Math.random() * 0.5);
+          alvo.appendChild(f);
+        }
+      }
+    </script>
+  </body>
+</html>

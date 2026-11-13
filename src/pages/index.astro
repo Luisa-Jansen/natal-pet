@@ -1,0 +1,278 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config.js';
+import { categorizar, CATEGORIAS } from '../lib/categorias.js';
+import dados from '../data/pets.json';
+
+const pets = dados.pets;
+
+// remove acentos para busca sem diferenciar acentuação
+const semAcento = (s) =>
+  (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+const especieInfo = {
+  cachorro: { label: 'Cachorro', emoji: '🐶' },
+  gato: { label: 'Gato', emoji: '🐱' },
+  indefinido: { label: 'Pet', emoji: '🐾' },
+};
+
+// enriquece cada pet com a categoria do presente
+const petsView = pets.map((p) => ({
+  ...p,
+  categoria: categorizar(p.pedido),
+  busca: semAcento(`${p.nome} ${p.pedido} ${p.historia}`),
+}));
+
+const totalPets = petsView.length;
+const totalCachorros = petsView.filter((p) => p.especie === 'cachorro').length;
+const totalGatos = petsView.filter((p) => p.especie === 'gato').length;
+
+// pet de destaque no hero
+const heroPet = petsView.find((p) => p.id === 'branca') || petsView[0];
+
+// dados enviados ao cliente (para o modal)
+const petsClient = petsView.map((p) => ({
+  id: p.id,
+  nome: p.nome,
+  especie: p.especie,
+  pedido: p.pedido,
+  cartinha: p.cartinha,
+  foto: p.foto,
+}));
+const configClient = { whatsapp: SITE.whatsapp, marca: SITE.marca };
+---
+
+<Layout>
+  <!-- CABEÇALHO -->
+  <header class="cabecalho">
+    <div class="container cabecalho-inner">
+      <a href="#topo" class="logo">
+        <span class="emoji">🎄</span>
+        <span>Adote uma Carta<br /><small style="font-weight:400;color:var(--tinta-suave);font-size:.72rem">{SITE.marca}</small></span>
+      </a>
+      <span class="chip-contador">
+        🎁 <b id="chip-num">0</b>&nbsp;cartinhas já realizadas
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="topo">
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-selo">✨ Campanha de Natal {SITE.ano} · {SITE.marca}</span>
+        <h1>Realize o <span class="destaque">desejo</span> de um pet neste Natal</h1>
+        <p class="sub">{SITE.descricao}</p>
+        <div class="hero-ctas">
+          <a href="#cartinhas" class="btn btn-primario">💌 Ver as cartinhas</a>
+          <a href="#como" class="btn btn-fantasma" style="color:#fff;border-color:rgba(255,255,255,.6)">Como funciona</a>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="num">{totalPets}</div>
+            <div class="rot">cartinhas de pets</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="stat-adotadas">0</div>
+            <div class="rot">já realizadas</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="stat-disponiveis">{totalPets}</div>
+            <div class="rot">esperando um padrinho</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src={heroPet.foto} alt={`Foto de ${heroPet.nome}`} width="340" height="255" />
+        <div class="legenda">"{heroPet.nome} está esperando por você 🐾"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="secao" id="como">
+    <div class="container">
+      <div class="secao-titulo">
+        <h2>Como funciona</h2>
+        <p>Em três passinhos você transforma o Natal de um pet que só espera por carinho.</p>
+      </div>
+      <div class="passos">
+        <div class="passo">
+          <span class="numero">1</span>
+          <div class="ic">💌</div>
+          <h3>Escolha uma cartinha</h3>
+          <p>Leia as histórias e descubra qual pedido de Natal você quer realizar.</p>
+        </div>
+        <div class="passo">
+          <span class="numero">2</span>
+          <div class="ic">🎁</div>
+          <h3>Garanta o presentinho</h3>
+          <p>Clique em “Adotar esta carta”, deixe seu nome e combine tudo pelo WhatsApp.</p>
+        </div>
+        <div class="passo">
+          <span class="numero">3</span>
+          <div class="ic">🐾</div>
+          <h3>Leve alegria</h3>
+          <p>Entregue o presente e faça o Natal de um focinho muito mais feliz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="secao galeria-topo" id="cartinhas">
+    <div class="container">
+      <div class="secao-titulo">
+        <h2>Escolha uma cartinha</h2>
+        <p>{totalPets} pets escreveram para o Papai Noel. Use a busca e os filtros para encontrar quem tocar seu coração.</p>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="filtros" role="search">
+        <div class="busca">
+          🔍
+          <input type="search" id="busca" placeholder="Buscar por nome ou pedido..." aria-label="Buscar cartinha" />
+        </div>
+        <div class="grupo-filtro" id="filtro-especie" role="group" aria-label="Filtrar por tipo">
+          <button class="pilula" data-f="especie" data-v="todos" aria-pressed="true">Todos</button>
+          <button class="pilula" data-f="especie" data-v="cachorro" aria-pressed="false">🐶 Cães ({totalCachorros})</button>
+          <button class="pilula" data-f="especie" data-v="gato" aria-pressed="false">🐱 Gatos ({totalGatos})</button>
+        </div>
+        <div class="grupo-filtro" id="filtro-categoria" role="group" aria-label="Filtrar por presente">
+          <button class="pilula" data-f="categoria" data-v="todos" aria-pressed="true">🎁 Todos os presentes</button>
+          {Object.entries(CATEGORIAS).map(([k, c]) => (
+            <button class="pilula" data-f="categoria" data-v={k} aria-pressed="false">{c.emoji} {c.label}</button>
+          ))}
+        </div>
+        <div class="grupo-filtro" id="filtro-status" role="group" aria-label="Filtrar por disponibilidade">
+          <button class="pilula" data-f="status" data-v="todos" aria-pressed="true">Todas</button>
+          <button class="pilula" data-f="status" data-v="disponivel" aria-pressed="false">Disponíveis</button>
+          <button class="pilula" data-f="status" data-v="adotada" aria-pressed="false">Realizadas</button>
+        </div>
+      </div>
+
+      <p class="contagem-resultado"><span id="n-resultado">{totalPets}</span> cartinhas encontradas</p>
+
+      <!-- GRADE -->
+      <div class="grade" id="grade">
+        {petsView.map((p) => {
+          const info = especieInfo[p.especie] || especieInfo.indefinido;
+          const cat = CATEGORIAS[p.categoria];
+          return (
+            <article
+              class="card"
+              data-id={p.id}
+              data-especie={p.especie}
+              data-categoria={p.categoria}
+              data-busca={p.busca}
+              tabindex="0"
+              role="button"
+              aria-label={`Ver cartinha de ${p.nome}`}
+            >
+              <div class="card-foto">
+                <img src={p.foto} alt={`Foto de ${p.nome}`} loading="lazy" width="300" height="300" />
+                <span class="badge-especie">{info.emoji} {info.label}</span>
+                <span class="selo-adotada">Realizada ✓</span>
+              </div>
+              <div class="card-corpo">
+                <h3>{p.nome}</h3>
+                <p class="card-pedido"><span class="lab">Pede de Natal:</span> {p.pedido}</p>
+                <div class="card-rodape">
+                  <span class="tag-presente">{cat.emoji} {cat.label}</span>
+                  <span class="ver-mais">ver cartinha →</span>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div class="vazio" id="vazio" style="display:none">
+        <div class="ic">🔍🎄</div>
+        <p>Nenhuma cartinha encontrada com esses filtros.<br />Tente outra busca!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape" id="contato">
+    <div class="container rodape-grid">
+      <div>
+        <h3>Feliz Natal, com amor 🐾</h3>
+        <p style="max-width:48ch">
+          A campanha <b>Adote uma Carta</b> é uma realização do {SITE.marca}. Cada presente entregue
+          é um gesto de carinho por quem só espera por um lar. {SITE.slogan}.
+        </p>
+      </div>
+      <div>
+        <strong style="color:#fff">Fale com a gente</strong>
+        {SITE.whatsapp.map((n) => (
+          <a class="wa" href={`https://wa.me/${n}`} target="_blank" rel="noopener">
+            📱 +{n.replace(/^55/, '55 ')}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="container rodape-base">
+      © {SITE.ano} {SITE.marca} — {SITE.slogan}. Todas as fotos e histórias pertencem à campanha.
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-nome">
+    <div class="modal">
+      <button class="modal-fechar" id="fechar" aria-label="Fechar">×</button>
+      <div class="modal-foto">
+        <img id="modal-img" src="" alt="" />
+      </div>
+      <div class="modal-conteudo">
+        <h2 id="modal-nome"></h2>
+        <div class="modal-especie" id="modal-especie"></div>
+        <div class="carta" id="modal-carta"></div>
+        <div class="pedido-destaque">
+          <span class="lab">🎁 Presente de Natal desejado</span>
+          <span id="modal-pedido"></span>
+        </div>
+
+        <!-- ações iniciais -->
+        <div class="modal-acoes" id="acoes">
+          <button class="btn btn-primario" id="btn-adotar">💝 Adotar esta carta</button>
+          <span id="aviso-adotada" style="display:none;text-align:center;color:var(--verde);font-weight:600">
+            🎉 Esta cartinha já foi realizada. Que tal escolher outra?
+          </span>
+        </div>
+
+        <!-- formulário de adoção -->
+        <form class="form-adocao" id="form-adocao">
+          <div class="campo">
+            <label for="f-nome">Seu nome *</label>
+            <input type="text" id="f-nome" name="nome" required maxlength="80" placeholder="Como podemos te chamar?" />
+          </div>
+          <div class="form-linha">
+            <div class="campo">
+              <label for="f-contato">WhatsApp ou e-mail</label>
+              <input type="text" id="f-contato" name="contato" maxlength="80" placeholder="(62) 90000-0000" />
+            </div>
+            <div class="campo">
+              <label for="f-cidade">Cidade</label>
+              <input type="text" id="f-cidade" name="cidade" maxlength="60" placeholder="Goiânia" />
+            </div>
+          </div>
+          <div class="form-erro" id="form-erro"></div>
+          <button type="submit" class="btn btn-whatsapp" id="btn-confirmar">✅ Confirmar e abrir o WhatsApp</button>
+          <button type="button" class="btn btn-fantasma" id="btn-voltar">Voltar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- dados para o cliente -->
+  <script type="application/json" id="dados-pets" set:html={JSON.stringify(petsClient)}></script>
+  <script type="application/json" id="dados-config" set:html={JSON.stringify(configClient)}></script>
+
+  <script src="../scripts/app.js"></script>
+</Layout>
